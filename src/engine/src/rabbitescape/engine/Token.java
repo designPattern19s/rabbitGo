@@ -93,7 +93,9 @@ public class Token extends Thing
                 TOKEN_BRIDGE_ON_SLOPE
                 );
 
-            case tempBlock:
+            case tempBlock:  // TODO tempBlock 토큰 구현
+            case pause:  // TODO pause 토큰 구현
+            case testdig:
             case block: return chooseState( 
                 moving, 
                 slopeBelow, 
@@ -133,20 +135,8 @@ public class Token extends Thing
                 TOKEN_BROLLY_FALL_TO_SLOPE, 
                 TOKEN_BROLLY_ON_SLOPE
                 );
-
             case slower:
-            case pause:
                 return null;
-
-            case testdig: return chooseState(
-                    moving,
-                    slopeBelow,
-                    onSlope,
-                    TOKEN_BLOCK_FALLING,
-                    TOKEN_BLOCK_STILL,
-                    TOKEN_BLOCK_FALL_TO_SLOPE,
-                    TOKEN_BLOCK_ON_SLOPE
-                );
 
             default: throw new UnknownType( type );
         }

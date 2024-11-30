@@ -296,6 +296,17 @@ public class Walking extends Behaviour
                 checkJumpOntoSlope( world, rabbit );
                 return true;
             }
+            case RABBIT_PAUSING:
+            {
+                rabbit.onSlope = false;
+                return true;
+            }
+            case RABBIT_PAUSING_RISE_LEFT:
+            case RABBIT_PAUSING_RISE_RIGHT:
+            {
+                rabbit.onSlope = true;
+                return true;
+            }
             default:
             {
                 throw new AssertionError(
