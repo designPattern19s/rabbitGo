@@ -11,7 +11,7 @@
 :rabbit_delay=4
 :music=tryad-witness
 :dig=5
-:testdig=3
+:pause=3
 :tempBlock=3
 ###########
 #   Q     #
