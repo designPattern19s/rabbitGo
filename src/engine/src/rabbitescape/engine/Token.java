@@ -30,7 +30,11 @@ public class Token extends Thing
         block,
         climb,
         explode,
-        brolly
+        brolly,
+        slower,
+        pause,
+        testdig,
+        tempBlock
     }
 
     public final Type type;
@@ -89,6 +93,7 @@ public class Token extends Thing
                 TOKEN_BRIDGE_ON_SLOPE
                 );
 
+            case tempBlock:
             case block: return chooseState( 
                 moving, 
                 slopeBelow, 
@@ -127,6 +132,20 @@ public class Token extends Thing
                 TOKEN_BROLLY_STILL,
                 TOKEN_BROLLY_FALL_TO_SLOPE, 
                 TOKEN_BROLLY_ON_SLOPE
+                );
+
+            case slower:
+            case pause:
+                return null;
+
+            case testdig: return chooseState(
+                    moving,
+                    slopeBelow,
+                    onSlope,
+                    TOKEN_BLOCK_FALLING,
+                    TOKEN_BLOCK_STILL,
+                    TOKEN_BLOCK_FALL_TO_SLOPE,
+                    TOKEN_BLOCK_ON_SLOPE
                 );
 
             default: throw new UnknownType( type );

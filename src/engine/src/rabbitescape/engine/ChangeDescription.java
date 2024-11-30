@@ -52,6 +52,8 @@ public class ChangeDescription
         RABBIT_BROLLYCHUTING,
         RABBIT_FALLING,
         RABBIT_FALLING_1,
+        RABBIT_SLOWER,
+        RABBIT_PAUSE,
 
         /** The flat block is two squares below where this starts.*/
         RABBIT_FALLING_1_TO_DEATH,

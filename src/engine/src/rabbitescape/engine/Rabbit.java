@@ -62,6 +62,10 @@ public class Rabbit extends Thing implements Comparable<Rabbit>
         Walking walking = new Walking();
         RabbotCrash rabbotCrash = new RabbotCrash();
         RabbotWait rabbotWait = new RabbotWait();
+        Pause pause = new Pause();
+        Slower slower = new Slower();
+        TestDig testDig = new TestDig();
+        TempBlocking tempBlocking = new TempBlocking();
 
         behavioursTriggerOrder.add( exploding );
         behavioursTriggerOrder.add( outOfBounds );
@@ -77,6 +81,10 @@ public class Rabbit extends Thing implements Comparable<Rabbit>
         behavioursTriggerOrder.add( bridging );
         behavioursTriggerOrder.add( blocking );
         behavioursTriggerOrder.add( rabbotWait );
+        behavioursTriggerOrder.add( pause );
+        behavioursTriggerOrder.add( slower );
+        behavioursTriggerOrder.add( testDig );
+        behavioursTriggerOrder.add( tempBlocking );
         behavioursTriggerOrder.add( walking );
 
         behaviours.add( exploding );
@@ -93,6 +101,10 @@ public class Rabbit extends Thing implements Comparable<Rabbit>
         behaviours.add( blocking );
         behaviours.add( climbing );
         behaviours.add( rabbotWait );
+        behaviours.add( pause );
+        behaviours.add( slower );
+        behaviours.add( testDig );
+        behaviours.add( tempBlocking );
         behaviours.add( walking );
 
         assert behavioursTriggerOrder.size() == behaviours.size();
