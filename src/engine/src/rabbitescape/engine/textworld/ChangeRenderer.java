@@ -294,7 +294,7 @@ public class ChangeRenderer
                 break;
             case RABBIT_OUT_OF_BOUNDS:
                 break;
-            case TOKEN_BASH_STILL:
+            /*case TOKEN_BASH_STILL:
             case TOKEN_BASH_ON_SLOPE:
             case TOKEN_DIG_STILL:
             case TOKEN_DIG_ON_SLOPE:
@@ -324,7 +324,7 @@ public class ChangeRenderer
             case TOKEN_BROLLY_FALLING:
             case TOKEN_BROLLY_FALL_TO_SLOPE:
                 chars.set( change.x, change.y + 1, 'f' );
-                break;
+                break;*/
             case WATER_REGION:
                 chars.set( change.x, change.y, 'N' );
                 break;
