@@ -204,6 +204,17 @@ public class ChangeDescription
         RABBIT_CRASHING,
         RABBIT_WAITING_LEFT,
         RABBIT_WAITING_RIGHT,
+
+        WATER_REGION,
+        WATER_REGION_HALF,
+        WATER_REGION_EMPTY,
+        WATER_REGION_FALLING,
+
+        ENTRANCE,
+        EXIT,
+    }
+
+    public enum TokenState {
         TOKEN_BASH_STILL,
         TOKEN_BASH_FALLING,
         TOKEN_BASH_FALL_TO_SLOPE,
@@ -247,15 +258,7 @@ public class ChangeDescription
         TOKEN_PAUSE_FALLING,
         TOKEN_PAUSE_STILL,
         TOKEN_PAUSE_FALL_TO_SLOPE,
-        TOKEN_PAUSE_ON_SLOPE,
-
-        WATER_REGION,
-        WATER_REGION_HALF,
-        WATER_REGION_EMPTY,
-        WATER_REGION_FALLING,
-
-        ENTRANCE,
-        EXIT,
+        TOKEN_PAUSE_ON_SLOPE
     }
 
     public static class Change

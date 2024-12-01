@@ -1,15 +1,20 @@
 package rabbitescape.engine;
 
 import static rabbitescape.engine.ChangeDescription.State.*;
+import static rabbitescape.engine.ChangeDescription.TokenState.*;
 
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 import rabbitescape.engine.ChangeDescription.State;
+import rabbitescape.engine.ChangeDescription.TokenState;
 import rabbitescape.engine.err.RabbitEscapeException;
 
 public class Token extends Thing
 {
+    TokenState state;
+
     public static class UnknownType extends RabbitEscapeException
     {
         public final Type type;
@@ -41,7 +46,8 @@ public class Token extends Thing
 
     public Token( int x, int y, Type type )
     {
-        super( x, y, switchType( type, false, false, true ) );
+        super( x, y, null );
+        this.state = switchType( type, false, false, true );
         this.type = type;
     }
 
@@ -54,8 +60,8 @@ public class Token extends Thing
         state = switchType( type, false, false, onSlope );
     }
 
-    private static State switchType( 
-        Type type, 
+    private static TokenState switchType(
+        Type type,
         boolean moving,
         boolean slopeBelow, 
         boolean onSlope 
@@ -160,14 +166,14 @@ public class Token extends Thing
         }
     }
 
-    private static State chooseState( 
+    private static TokenState chooseState(
         boolean moving, 
         boolean slopeBelow,
         boolean onSlope, 
-        State falling,
-        State onFlat, 
-        State fallingToSlope,
-        State onSlopeState
+        TokenState falling,
+        TokenState onFlat,
+        TokenState fallingToSlope,
+        TokenState onSlopeState
     )
     {
         if ( onSlope )
@@ -260,5 +266,11 @@ public class Token extends Thing
     public String overlayText()
     {
         return type.toString();
+    }
+
+    @Override
+    public String stateName()
+    {
+        return state.name().toLowerCase( Locale.ENGLISH );
     }
 }
