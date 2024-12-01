@@ -214,7 +214,7 @@ public class ChangeDescription
         EXIT,
     }
 
-    public enum TokenState {
+    /*public enum TokenState {
         TOKEN_BASH_STILL,
         TOKEN_BASH_FALLING,
         TOKEN_BASH_FALL_TO_SLOPE,
@@ -259,7 +259,7 @@ public class ChangeDescription
         TOKEN_PAUSE_STILL,
         TOKEN_PAUSE_FALL_TO_SLOPE,
         TOKEN_PAUSE_ON_SLOPE
-    }
+    }*/
 
     public static class Change
     {
