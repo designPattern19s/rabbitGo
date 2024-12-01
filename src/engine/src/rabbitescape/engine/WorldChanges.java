@@ -32,10 +32,13 @@ public class WorldChanges
 
     private List<Rabbit> rabbitsJustEntered = new ArrayList<Rabbit>();
 
+    private TokenFactory tokenFactory;
+
     public WorldChanges( World world, WorldStatsListener statsListener )
     {
         this.world = world;
         this.statsListener = statsListener;
+        this.tokenFactory = new TokenFactory();
         updateStats();
     }
 
@@ -189,7 +192,7 @@ public class WorldChanges
             return;
         }
 
-        tokensToAdd.add( new Token( x, y, type, world ) );
+        tokensToAdd.add( tokenFactory.createToken( x, y, type, world ) );
         world.abilities.put( type, numLeft - 1 );
     }
 

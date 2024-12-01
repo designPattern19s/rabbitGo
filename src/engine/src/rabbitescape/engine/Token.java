@@ -1,24 +1,22 @@
 package rabbitescape.engine;
 
-import static rabbitescape.engine.ChangeDescription.State.*;
-import static rabbitescape.engine.ChangeDescription.TokenState.*;
-
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
-import rabbitescape.engine.ChangeDescription.State;
-import rabbitescape.engine.ChangeDescription.TokenState;
 import rabbitescape.engine.err.RabbitEscapeException;
 
-public class Token extends Thing
+import static rabbitescape.engine.AbState.*;
+
+public abstract class Token extends Thing
 {
-    TokenState state;
+    protected AbState state;
 
     public static class UnknownType extends RabbitEscapeException
     {
         public final Type type;
 
+        // FIXME
         public UnknownType( Type type )
         {
             this.type = type;
@@ -57,123 +55,27 @@ public class Token extends Thing
         boolean onSlope = BehaviourTools.isSlope( world.getBlockAt( x, y ) );
         // Can't use calcNewState here since we have just been created, so
         // can't be moving (until a time step passes).
-        state = switchType( type, false, false, onSlope );
+        this.state = switchType( type, false, false, onSlope );
     }
 
-    private static TokenState switchType(
+    private static AbState switchType(
         Type type,
         boolean moving,
         boolean slopeBelow, 
         boolean onSlope 
     )
     {
-        switch( type )
-        {
-            case bash:   return chooseState( 
-                moving, 
-                slopeBelow, 
-                onSlope,
-                TOKEN_BASH_FALLING, 
-                TOKEN_BASH_STILL,
-                TOKEN_BASH_FALL_TO_SLOPE, 
-                TOKEN_BASH_ON_SLOPE
-                );
-
-            case dig:    return chooseState( 
-                moving, 
-                slopeBelow, 
-                onSlope,
-                TOKEN_DIG_FALLING, 
-                TOKEN_DIG_STILL,
-                TOKEN_DIG_FALL_TO_SLOPE, 
-                TOKEN_DIG_ON_SLOPE
-                );
-
-            case bridge: return chooseState( 
-                moving, 
-                slopeBelow, 
-                onSlope,
-                TOKEN_BRIDGE_FALLING, 
-                TOKEN_BRIDGE_STILL,
-                TOKEN_BRIDGE_FALL_TO_SLOPE, 
-                TOKEN_BRIDGE_ON_SLOPE
-                );
-
-            case tempBlock: return chooseState(
-                moving,
-                slopeBelow,
-                onSlope,
-                TOKEN_TEMP_BLOCK_FALLING,
-                TOKEN_TEMP_BLOCK_STILL,
-                TOKEN_TEMP_BLOCK_FALL_TO_SLOPE,
-                TOKEN_TEMP_BLOCK_ON_SLOPE
-            );
-
-            case pause: return chooseState(
-                moving,
-                slopeBelow,
-                onSlope,
-                TOKEN_PAUSE_FALLING,
-                TOKEN_PAUSE_STILL,
-                TOKEN_PAUSE_FALL_TO_SLOPE,
-                TOKEN_PAUSE_ON_SLOPE
-            );
-
-            case testdig:
-            case block: return chooseState( 
-                moving, 
-                slopeBelow, 
-                onSlope,
-                TOKEN_BLOCK_FALLING, 
-                TOKEN_BLOCK_STILL,
-                TOKEN_BLOCK_FALL_TO_SLOPE, 
-                TOKEN_BLOCK_ON_SLOPE
-                );
-
-            case climb: return chooseState( 
-                moving, 
-                slopeBelow, 
-                onSlope,
-                TOKEN_CLIMB_FALLING, 
-                TOKEN_CLIMB_STILL,
-                TOKEN_CLIMB_FALL_TO_SLOPE, 
-                TOKEN_CLIMB_ON_SLOPE
-                );
-
-            case explode: return chooseState( 
-                moving, 
-                slopeBelow, 
-                onSlope,
-                TOKEN_EXPLODE_FALLING, 
-                TOKEN_EXPLODE_STILL,
-                TOKEN_EXPLODE_FALL_TO_SLOPE, 
-                TOKEN_EXPLODE_ON_SLOPE)
-                ;
-
-            case brolly: return chooseState( 
-                moving, 
-                slopeBelow, 
-                onSlope,
-                TOKEN_BROLLY_FALLING, 
-                TOKEN_BROLLY_STILL,
-                TOKEN_BROLLY_FALL_TO_SLOPE, 
-                TOKEN_BROLLY_ON_SLOPE
-                );
-            case slower:
-                return null;
-
-            default: throw new UnknownType( type );
-        }
+        return chooseState( moving, slopeBelow, onSlope, FALLING, STILL, FALL_TO_SLOPE, ON_SLOPE );
     }
 
-    private static TokenState chooseState(
+    private static AbState chooseState(
         boolean moving, 
         boolean slopeBelow,
         boolean onSlope, 
-        TokenState falling,
-        TokenState onFlat,
-        TokenState fallingToSlope,
-        TokenState onSlopeState
+        AbState falling,
+        AbState onFlat,
+        AbState fallingToSlope,
+        AbState onSlopeState
     )
     {
         if ( onSlope )
@@ -212,24 +114,8 @@ public class Token extends Thing
     {
         switch ( state )
         {
-        case TOKEN_BASH_FALLING:
-        case TOKEN_BASH_FALL_TO_SLOPE:
-        case TOKEN_DIG_FALLING:
-        case TOKEN_DIG_FALL_TO_SLOPE:
-        case TOKEN_BRIDGE_FALLING:
-        case TOKEN_BRIDGE_FALL_TO_SLOPE:
-        case TOKEN_BLOCK_FALLING:
-        case TOKEN_BLOCK_FALL_TO_SLOPE:
-        case TOKEN_CLIMB_FALLING:
-        case TOKEN_CLIMB_FALL_TO_SLOPE:
-        case TOKEN_EXPLODE_FALL_TO_SLOPE:
-        case TOKEN_EXPLODE_FALLING:
-        case TOKEN_BROLLY_FALLING:
-        case TOKEN_BROLLY_FALL_TO_SLOPE:
-        case TOKEN_TEMP_BLOCK_FALLING:
-        case TOKEN_TEMP_BLOCK_FALL_TO_SLOPE:
-        case TOKEN_PAUSE_FALLING:
-        case TOKEN_PAUSE_FALL_TO_SLOPE:
+        case FALLING:
+        case FALL_TO_SLOPE:
         {
             ++y;
 
@@ -266,11 +152,5 @@ public class Token extends Thing
     public String overlayText()
     {
         return type.toString();
-    }
-
-    @Override
-    public String stateName()
-    {
-        return state.name().toLowerCase( Locale.ENGLISH );
     }
 }

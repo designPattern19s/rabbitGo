@@ -5,16 +5,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
-import rabbitescape.engine.Entrance;
-import rabbitescape.engine.Exit;
-import rabbitescape.engine.Fire;
-import rabbitescape.engine.IgnoreWorldStatsListener;
-import rabbitescape.engine.Pipe;
-import rabbitescape.engine.Rabbit;
-import rabbitescape.engine.Thing;
-import rabbitescape.engine.Token;
-import rabbitescape.engine.VoidMarkerStyle;
-import rabbitescape.engine.World;
+import rabbitescape.engine.*;
 import rabbitescape.engine.textworld.Comment;
 
 /**
@@ -30,6 +21,8 @@ public class SandboxGame
     private Token.Type selectedType = null;
     /** The world object that is contained in the game. */
     private final World world;
+
+    private TokenFactory tokenFactory;
 
     /**
      * Create a sandbox game based on a given world. This allows playing with
@@ -67,6 +60,7 @@ public class SandboxGame
             new IgnoreWorldStatsListener(),
             VoidMarkerStyle.Style.HIGHLIGHTER
         );
+        this.tokenFactory = new TokenFactory();
     }
 
     /**
@@ -97,7 +91,7 @@ public class SandboxGame
             else if ( thing instanceof Token )
             {
                 Token token = (Token)thing;
-                clonedThings.add( new Token( token.x, token.y, token.type ) );
+                clonedThings.add( tokenFactory.createToken( token.x, token.y, token.type ) );
             }
             else if ( thing instanceof Fire )
             {

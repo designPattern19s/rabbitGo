@@ -20,15 +20,7 @@ import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import rabbitescape.engine.Block;
-import rabbitescape.engine.Entrance;
-import rabbitescape.engine.Exit;
-import rabbitescape.engine.Fire;
-import rabbitescape.engine.Pipe;
-import rabbitescape.engine.Rabbit;
-import rabbitescape.engine.Thing;
-import rabbitescape.engine.Token;
-import rabbitescape.engine.VoidMarkerStyle;
+import rabbitescape.engine.*;
 import rabbitescape.engine.util.Dimension;
 import rabbitescape.engine.util.MegaCoder;
 import rabbitescape.engine.util.Position;
@@ -38,6 +30,8 @@ import rabbitescape.engine.util.WaterUtil;
 public class LineProcessor
 {
     public static final String CODE_SUFFIX = ".code";
+
+    private TokenFactory tokenFactory;
 
     public static class KeyListKey
     {
@@ -123,6 +117,8 @@ public class LineProcessor
         this.m_metaIntArrays         = new HashMap<>();
         starPoints = new ArrayList<Position>();
         this.comments = new ArrayList<Comment>();
+
+        this.tokenFactory = new TokenFactory();
 
         width = -1;
         height = 0;
@@ -597,43 +593,43 @@ public class LineProcessor
             }
             case 'b':
             {
-                ret = new Token( x, y, Token.Type.bash );
+                ret = tokenFactory.createToken( x, y, Token.Type.bash );
                 things.add( ret );
                 break;
             }
             case 'd':
             {
-                ret = new Token( x, y, Token.Type.dig );
+                ret = tokenFactory.createToken( x, y, Token.Type.dig );
                 things.add( ret );
                 break;
             }
             case 'i':
             {
-                ret = new Token( x, y, Token.Type.bridge );
+                ret = tokenFactory.createToken( x, y, Token.Type.bridge );
                 things.add( ret );
                 break;
             }
             case 'k':
             {
-                ret = new Token( x, y, Token.Type.block );
+                ret = tokenFactory.createToken( x, y, Token.Type.block );
                 things.add( ret );
                 break;
             }
             case 'c':
             {
-                ret = new Token( x, y, Token.Type.climb );
+                ret = tokenFactory.createToken( x, y, Token.Type.climb );
                 things.add( ret );
                 break;
             }
             case 'p':
             {
-                ret = new Token( x, y, Token.Type.explode );
+                ret = tokenFactory.createToken( x, y, Token.Type.explode );
                 things.add( ret );
                 break;
             }
             case 'l':
             {
-                ret = new Token( x, y, Token.Type.brolly );
+                ret = tokenFactory.createToken( x, y, Token.Type.brolly );
                 things.add( ret );
                 break;
             }

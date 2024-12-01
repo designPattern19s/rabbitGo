@@ -67,7 +67,7 @@ public class Rabbit extends Thing implements Comparable<Rabbit>
         TestDig testDig = new TestDig();
         TempBlocking tempBlocking = new TempBlocking();
 
-        behavioursTriggerOrder.add( exploding );
+        /*behavioursTriggerOrder.add( exploding );*/
         behavioursTriggerOrder.add( outOfBounds );
         behavioursTriggerOrder.add( burning );
         behavioursTriggerOrder.add( drowning );
