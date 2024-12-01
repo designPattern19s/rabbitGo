@@ -37,7 +37,7 @@ public class Token extends Thing
         slower,
         pause,
         testdig,
-        tempBlock
+        temp_block
     }
 
     public final Type type;

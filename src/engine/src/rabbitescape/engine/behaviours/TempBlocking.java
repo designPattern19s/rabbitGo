@@ -24,7 +24,7 @@ public class TempBlocking extends Behaviour
     public boolean checkTriggered( Rabbit rabbit, World world )
     {
         BehaviourTools t = new BehaviourTools( rabbit, world );
-        boolean isTriggered = t.pickUpToken( tempBlock );
+        boolean isTriggered = t.pickUpToken( temp_block );
         if (isTriggered) {
             blockingCnt = BLOCKING_TIME;  // 트리거가 발생하면 정해진 시간 만큼 cnt 설정
         }
