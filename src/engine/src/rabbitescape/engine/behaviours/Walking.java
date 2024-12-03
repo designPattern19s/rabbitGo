@@ -7,11 +7,25 @@ import static rabbitescape.engine.Block.Shape.*;
 import rabbitescape.engine.*;
 import rabbitescape.engine.ChangeDescription.State;
 
+import java.util.Map;
+
 public class Walking extends Behaviour
 {
     @Override
     public void cancel()
     {
+    }
+
+    @Override
+    public void saveState( Map<String, String> saveState, Rabbit rabbit )
+    {
+
+    }
+
+    @Override
+    public void restoreFromState( Map<String, String> saveState, Rabbit rabbit )
+    {
+
     }
 
     private static class StateCalc
@@ -304,6 +318,12 @@ public class Walking extends Behaviour
                 );
             }
         }
+    }
+
+    @Override
+    public void cancel( Rabbit rabbit )
+    {
+
     }
 
     /**

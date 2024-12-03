@@ -15,30 +15,21 @@ import rabbitescape.engine.World;
 
 public class Brollychuting extends Behaviour
 {
-    boolean hasAbility = false;
-    private final Climbing climbing;
-    private final Digging digging;
-
-    public Brollychuting( Climbing climbing, Digging digging )
-    {
-        this.climbing = climbing;
-        this.digging = digging;
-    }
 
     @Override
     public State newState( BehaviourTools t, boolean triggered )
     {
         if ( triggered )
         {
-            hasAbility = true;
+            t.rabbit.hasAbility_brolly = true;
         }
 
-        if( !hasAbility )
+        if( !t.rabbit.hasAbility_brolly )
         {
             return null;
         }
 
-        if ( climbing.abilityActive )
+        if ( t.rabbit.abilityActive_climbing )
         {
             return null;
         }
@@ -90,9 +81,15 @@ public class Brollychuting extends Behaviour
         return false;
     }
 
-    public boolean hasBrolly()
+    @Override
+    public void cancel( Rabbit rabbit )
     {
-        return hasAbility;
+
+    }
+
+    public boolean hasBrolly(Rabbit rabbit)
+    {
+        return rabbit.hasAbility_brolly;
     }
 
     @Override
@@ -100,17 +97,17 @@ public class Brollychuting extends Behaviour
     {
         BehaviourTools t = new BehaviourTools( rabbit, world );
 
-        if ( !hasAbility && t.pickUpToken( brolly, true ) )
+        if ( !rabbit.hasAbility_brolly && t.pickUpToken( brolly, true ) )
         {
             return true;
         }
 
-        if( !hasAbility )
+        if( !rabbit.hasAbility_brolly )
         {
             return false;
         }
 
-        if ( climbing.abilityActive || digging.stepsOfDigging > 2 )
+        if ( rabbit.abilityActive_climbing || rabbit.stepsOfDigging > 2 )
         {
             return false;
         }
@@ -137,19 +134,19 @@ public class Brollychuting extends Behaviour
     }
 
     @Override
-    public void saveState( Map<String, String> saveState )
+    public void saveState( Map<String, String> saveState , Rabbit rabbit )
     {
         BehaviourState.addToStateIfTrue(
-            saveState, "Brollychuting.hasAbility", hasAbility
+            saveState, "Brollychuting.hasAbility", rabbit.hasAbility_brolly
         );
 
     }
 
     @Override
-    public void restoreFromState( Map<String, String> saveState )
+    public void restoreFromState( Map<String, String> saveState , Rabbit rabbit )
     {
-        hasAbility = BehaviourState.restoreFromState(
-            saveState, "Brollychuting.hasAbility", hasAbility
+        rabbit.hasAbility_brolly = BehaviourState.restoreFromState(
+            saveState, "Brollychuting.hasAbility", rabbit.hasAbility_brolly
         );
 
     }

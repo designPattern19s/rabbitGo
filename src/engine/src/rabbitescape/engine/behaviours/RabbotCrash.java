@@ -6,11 +6,25 @@ import rabbitescape.engine.ChangeDescription.State;
 import rabbitescape.engine.Rabbit;
 import rabbitescape.engine.World;
 
+import java.util.Map;
+
 public class RabbotCrash extends Behaviour
 {
     @Override
     public void cancel()
     {
+    }
+
+    @Override
+    public void saveState( Map<String, String> saveState, Rabbit rabbit )
+    {
+
+    }
+
+    @Override
+    public void restoreFromState( Map<String, String> saveState, Rabbit rabbit )
+    {
+
     }
 
     @Override
@@ -56,5 +70,11 @@ public class RabbotCrash extends Behaviour
         }
 
         return false;
+    }
+
+    @Override
+    public void cancel( Rabbit rabbit )
+    {
+
     }
 }

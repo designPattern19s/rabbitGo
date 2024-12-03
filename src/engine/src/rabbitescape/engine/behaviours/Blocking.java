@@ -10,12 +10,11 @@ import rabbitescape.engine.ChangeDescription.State;
 
 public class Blocking extends Behaviour
 {
-    public boolean abilityActive = false;
 
     @Override
-    public void cancel()
+    public void cancel(Rabbit rabbit)
     {
-        abilityActive = false;
+        rabbit.abilityActive_blocking = false;
     }
 
     @Override
@@ -26,12 +25,18 @@ public class Blocking extends Behaviour
     }
 
     @Override
+    public void cancel()
+    {
+
+    }
+
+    @Override
     public State newState( BehaviourTools t, boolean triggered )
     {
-        if ( abilityActive || triggered )
+        if ( t.rabbit.abilityActive_blocking || triggered )
         {
             t.rabbit.possiblyUndoSlopeBashHop( t.world );
-            abilityActive = true;
+            t.rabbit.abilityActive_blocking = true;
             Block here = t.blockHere();
             if( BehaviourTools.isRightRiseSlope( here ) )
             {
@@ -57,18 +62,18 @@ public class Blocking extends Behaviour
     }
 
     @Override
-    public void saveState( Map<String, String> saveState )
+    public void saveState( Map<String, String> saveState , Rabbit rabbit)
     {
         BehaviourState.addToStateIfTrue(
-            saveState, "Blocking.abilityActive", abilityActive
+            saveState, "Blocking.abilityActive", rabbit.abilityActive_blocking
         );
     }
 
     @Override
-    public void restoreFromState( Map<String, String> saveState )
+    public void restoreFromState( Map<String, String> saveState , Rabbit rabbit )
     {
-        abilityActive = BehaviourState.restoreFromState(
-            saveState, "Blocking.abilityActive", abilityActive
+        rabbit.abilityActive_blocking = BehaviourState.restoreFromState(
+            saveState, "Blocking.abilityActive", rabbit.abilityActive_blocking
         );
     }
 

@@ -26,6 +26,8 @@ public abstract class Behaviour
      */
     public abstract boolean behave( World world, Rabbit rabbit, State state );
 
+    public abstract void cancel( Rabbit rabbit );
+
     /**
      * Examine the rabbit's situation and return true if this Behaviour must
      * take control.
@@ -38,7 +40,17 @@ public abstract class Behaviour
     {
     }
 
+    public abstract void saveState(
+        Map<String, String> saveState,
+        Rabbit rabbit
+    );
+
     public void restoreFromState( Map<String, String> saveState )
     {
     }
+
+    public abstract void restoreFromState(
+        Map<String, String> saveState,
+        Rabbit rabbit
+    );
 }

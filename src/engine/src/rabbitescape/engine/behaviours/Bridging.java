@@ -12,35 +12,24 @@ import rabbitescape.engine.ChangeDescription.State;
 
 public class Bridging extends Behaviour
 {
-    enum BridgeType
-    {
-        ALONG,
-        UP,
-        DOWN_UP
-    }
-
-    private int smallSteps = 0;
-    private int bigSteps = 0;
-    private BridgeType bridgeType = BridgeType.ALONG;
-
     @Override
-    public void cancel()
+    public void cancel(Rabbit rabbit)
     {
-        bigSteps = 0;
-        smallSteps = 0;
+        rabbit.bigSteps = 0;
+        rabbit.smallSteps = 0;
     }
 
     @Override
     public boolean checkTriggered( Rabbit rabbit, World world )
     {
-        nextStep();
+        nextStep(rabbit);
 
-        if ( bigSteps <= 0 )
+        if ( rabbit.bigSteps <= 0 )
             // Only pick up a token if we've finished, and we can bridge
         {
             BehaviourTools t = new BehaviourTools( rabbit, world );
 
-            State possibleState = bridgingState( t, 3, 3, bridgeType );
+            State possibleState = bridgingState( t, 3, 3, rabbit.bridgeType );
 
             if ( possibleState != null ) // Only pick up if we can bridge
             {
@@ -51,24 +40,30 @@ public class Bridging extends Behaviour
     }
 
     @Override
+    public void cancel()
+    {
+
+    }
+
+    @Override
     public State newState( BehaviourTools t, boolean triggered )
     {
         if ( triggered )
         {
-            smallSteps = 3;
-            bigSteps = 3;
+            t.rabbit.smallSteps = 3;
+            t.rabbit.bigSteps = 3;
         }
 
-        State ret = bridgingState( t, bigSteps, smallSteps, bridgeType );
+        State ret = bridgingState( t, t.rabbit.bigSteps, t.rabbit.smallSteps, t.rabbit.bridgeType );
 
         if ( ret == null )
         {
-            bigSteps = 0;
+            t.rabbit.bigSteps = 0;
         }
 
-        if ( bigSteps <= 0 )
+        if ( t.rabbit.bigSteps <= 0 )
         {
-            smallSteps = 0;
+            t.rabbit.smallSteps = 0;
             return null;   // Finished bridging
         }
 
@@ -79,7 +74,7 @@ public class Bridging extends Behaviour
         BehaviourTools t,
         int bs,
         int ss,
-        BridgeType bt
+        Rabbit.BridgeType bt
     )
     {
         Block hereBlock = t.blockHere();
@@ -373,13 +368,13 @@ public class Bridging extends Behaviour
         return ret;
     }
 
-    private void nextStep()
+    private void nextStep(Rabbit rabbit)
     {
-        --smallSteps;
-        if ( smallSteps <= 0 )
+        --rabbit.smallSteps;
+        if ( rabbit.smallSteps <= 0 )
         {
-            --bigSteps;
-            smallSteps = 3;
+            --rabbit.bigSteps;
+            rabbit.smallSteps = 3;
         }
     }
 
@@ -411,7 +406,7 @@ public class Bridging extends Behaviour
             case RABBIT_BRIDGING_LEFT_1:
             case RABBIT_BRIDGING_LEFT_2:
             {
-                bridgeType = BridgeType.ALONG;
+                rabbit.bridgeType = Rabbit.BridgeType.ALONG;
                 return true;
             }
             case RABBIT_BRIDGING_UP_RIGHT_1:
@@ -419,7 +414,7 @@ public class Bridging extends Behaviour
             case RABBIT_BRIDGING_UP_LEFT_1:
             case RABBIT_BRIDGING_UP_LEFT_2:
             {
-                bridgeType = BridgeType.UP;
+                rabbit.bridgeType = Rabbit.BridgeType.UP;
                 return true;
             }
             case RABBIT_BRIDGING_DOWN_UP_RIGHT_1:
@@ -427,7 +422,7 @@ public class Bridging extends Behaviour
             case RABBIT_BRIDGING_DOWN_UP_LEFT_1:
             case RABBIT_BRIDGING_DOWN_UP_LEFT_2:
             {
-                bridgeType = BridgeType.DOWN_UP;
+                rabbit.bridgeType = Rabbit.BridgeType.DOWN_UP;
                 return true;
             }
             case RABBIT_BRIDGING_IN_CORNER_RIGHT_1:
@@ -439,7 +434,7 @@ public class Bridging extends Behaviour
             case RABBIT_BRIDGING_IN_CORNER_UP_RIGHT_2:
             case RABBIT_BRIDGING_IN_CORNER_UP_LEFT_2:
             {
-                bridgeType = BridgeType.ALONG;
+                rabbit.bridgeType = Rabbit.BridgeType.ALONG;
                 return true;
             }
             case RABBIT_BRIDGING_RIGHT_3:
@@ -572,44 +567,44 @@ public class Bridging extends Behaviour
     }
 
     @Override
-    public void saveState( Map<String, String> saveState )
+    public void saveState( Map<String, String> saveState, Rabbit rabbit)
     {
         BehaviourState.addToStateIfNotDefault(
             saveState,
             "Bridging.bridgeType",
-            bridgeType.toString(),
-            BridgeType.ALONG.toString()
+            rabbit.bridgeType.toString(),
+            Rabbit.BridgeType.ALONG.toString()
         );
 
         BehaviourState.addToStateIfGtZero(
-            saveState, "Bridging.bigSteps", bigSteps
+            saveState, "Bridging.bigSteps", rabbit.bigSteps
         );
 
         BehaviourState.addToStateIfGtZero(
-            saveState, "Bridging.smallSteps", smallSteps
+            saveState, "Bridging.smallSteps", rabbit.smallSteps
         );
     }
 
     @Override
-    public void restoreFromState( Map<String, String> saveState )
+    public void restoreFromState( Map<String, String> saveState , Rabbit rabbit )
     {
-        bridgeType = BridgeType.valueOf(
+        rabbit.bridgeType = Rabbit.BridgeType.valueOf(
             BehaviourState.restoreFromState(
-                saveState, "Bridging.bridgeType", bridgeType.toString()
+                saveState, "Bridging.bridgeType", rabbit.bridgeType.toString()
             )
         );
 
-        bigSteps = BehaviourState.restoreFromState(
-            saveState, "Bridging.bigSteps", bigSteps
+        rabbit.bigSteps = BehaviourState.restoreFromState(
+            saveState, "Bridging.bigSteps", rabbit.bigSteps
         );
 
-        smallSteps = BehaviourState.restoreFromState(
-            saveState, "Bridging.smallSteps", smallSteps
+        rabbit.smallSteps = BehaviourState.restoreFromState(
+            saveState, "Bridging.smallSteps", rabbit.smallSteps
         );
 
-        if ( smallSteps > 0 )
+        if ( rabbit.smallSteps > 0 )
         {
-            ++smallSteps;
+            ++rabbit.smallSteps;
         }
     }
 }

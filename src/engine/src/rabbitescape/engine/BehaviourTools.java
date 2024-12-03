@@ -106,7 +106,7 @@ public class BehaviourTools
      */
     public boolean pickUpToken( Token.Type type, boolean evenIfNotOnGround )
     {
-        if ( rabbitIsFalling() && rabbit.isFallingToDeath() )
+        if ( rabbitIsFalling() && rabbit.isFallingToDeath(rabbit) )
         {
             return false; // Dying rabbits not allowed to consume tokens
         }

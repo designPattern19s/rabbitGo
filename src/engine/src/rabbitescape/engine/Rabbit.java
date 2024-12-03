@@ -24,14 +24,61 @@ public class Rabbit extends Thing implements Comparable<Rabbit>
 
     public int index;
 
-    private Falling falling;
-
     public Direction dir;
     public boolean onSlope;
     /** Rabbits move up 1 cell to bash from a slope.
      *  Keep a note, so it can be undone.  */
     public boolean slopeBashHop = false;
     public final Type type;
+
+
+    //climbing
+    public boolean hasAbility_climbing = false;
+    public boolean abilityActive_climbing = false;
+    //digging
+    public int stepsOfDigging;
+    //brollychuting
+    public boolean hasAbility_brolly = false;
+
+    //falling
+    public int heightFallen = 0;
+    public int fatalHeight;
+
+    //bashing
+    public int stepsOfBashing;
+    //bridging
+    public enum BridgeType
+    {
+        ALONG,
+        UP,
+        DOWN_UP
+    }
+
+    public int smallSteps = 0;
+    public int bigSteps = 0;
+    public Rabbit.BridgeType bridgeType = BridgeType.ALONG;
+
+    //blocking
+    public boolean abilityActive_blocking = false;
+
+
+    private static final Climbing climbing = new Climbing();
+    private static final     Digging digging = new Digging();
+    private static final     Exploding exploding = new Exploding();
+    private static final     Burning burning = new Burning();
+    private static final     OutOfBounds outOfBounds = new OutOfBounds();
+    private static final     Drowning drowning = new Drowning();
+    private static final     Exiting exiting = new Exiting();
+    private static final     Brollychuting brollychuting = new Brollychuting();
+    private static final     Falling falling = new Falling();
+    private static final     Bashing bashing = new Bashing();
+    private static final     Bridging bridging = new Bridging();
+    private static final     Blocking blocking = new Blocking();
+    private static final     Walking walking = new Walking();
+    private static final     RabbotCrash rabbotCrash = new RabbotCrash();
+    private static final     RabbotWait rabbotWait = new RabbotWait();
+
+
 
     public Rabbit( int x, int y, Direction dir, Type type )
     {
@@ -43,26 +90,11 @@ public class Rabbit extends Thing implements Comparable<Rabbit>
         behavioursTriggerOrder = new ArrayList<>();
         createBehaviours();
         index = NOT_INDEXED;
+        fatalHeight = getFatalHeight();
     }
 
     private void createBehaviours()
     {
-        Climbing climbing = new Climbing();
-        Digging digging = new Digging();
-        Exploding exploding = new Exploding();
-        Burning burning = new Burning();
-        OutOfBounds outOfBounds = new OutOfBounds();
-        Drowning drowning = new Drowning();
-        Exiting exiting = new Exiting();
-        Brollychuting brollychuting = new Brollychuting( climbing, digging );
-        falling = new Falling( climbing, brollychuting, getFatalHeight() );
-        Bashing bashing = new Bashing();
-        Bridging bridging = new Bridging();
-        Blocking blocking = new Blocking();
-        Walking walking = new Walking();
-        RabbotCrash rabbotCrash = new RabbotCrash();
-        RabbotWait rabbotWait = new RabbotWait();
-
         behavioursTriggerOrder.add( exploding );
         behavioursTriggerOrder.add( outOfBounds );
         behavioursTriggerOrder.add( burning );
@@ -98,9 +130,9 @@ public class Rabbit extends Thing implements Comparable<Rabbit>
         assert behavioursTriggerOrder.size() == behaviours.size();
     }
 
-    public boolean isFallingToDeath()
+    public boolean isFallingToDeath(Rabbit rabbit)
     {
-        return falling.isFallingToDeath();
+        return falling.isFallingToDeath(rabbit);
     }
 
     @Override
@@ -190,7 +222,7 @@ public class Rabbit extends Thing implements Comparable<Rabbit>
 
         for ( Behaviour behaviour : behaviours )
         {
-            behaviour.saveState( ret );
+            behaviour.saveState( ret, this );
         }
 
         return ret;
@@ -207,7 +239,7 @@ public class Rabbit extends Thing implements Comparable<Rabbit>
 
         for ( Behaviour behaviour : behaviours )
         {
-            behaviour.restoreFromState( state );
+            behaviour.restoreFromState( state, this );
         }
     }
 

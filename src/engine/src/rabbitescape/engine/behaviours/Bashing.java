@@ -11,12 +11,11 @@ import rabbitescape.engine.ChangeDescription.State;
 
 public class Bashing extends Behaviour
 {
-    private int stepsOfBashing;
 
     @Override
-    public void cancel()
+    public void cancel(Rabbit rabbit)
     {
-        stepsOfBashing = 0;
+        rabbit.stepsOfBashing = 0;
     }
 
     @Override
@@ -28,9 +27,15 @@ public class Bashing extends Behaviour
     }
 
     @Override
+    public void cancel()
+    {
+
+    }
+
+    @Override
     public State newState( BehaviourTools t, boolean triggered )
     {
-        if ( triggered || stepsOfBashing > 0 )
+        if ( triggered || t.rabbit.stepsOfBashing > 0 )
         {
             if (
                    t.isOnUpSlope()
@@ -39,7 +44,7 @@ public class Bashing extends Behaviour
             {
                 if (t.blockAboveNext().material == Block.Material.METAL)
                 {
-                    stepsOfBashing = 0;
+                    t.rabbit.stepsOfBashing = 0;
                     return t.rl(
                         RABBIT_BASHING_USELESSLY_RIGHT_UP,
                         RABBIT_BASHING_USELESSLY_LEFT_UP
@@ -47,7 +52,7 @@ public class Bashing extends Behaviour
                 }
                 else
                 {
-                    stepsOfBashing = 2;
+                    t.rabbit.stepsOfBashing = 2;
                     return t.rl(
                         RABBIT_BASHING_UP_RIGHT,
                         RABBIT_BASHING_UP_LEFT
@@ -69,7 +74,7 @@ public class Bashing extends Behaviour
             {
                 if ( t.blockNext().material == Block.Material.METAL )
                 {
-                    stepsOfBashing = 0;
+                    t.rabbit.stepsOfBashing = 0;
                     return t.rl(
                         RABBIT_BASHING_USELESSLY_RIGHT,
                         RABBIT_BASHING_USELESSLY_LEFT
@@ -77,7 +82,7 @@ public class Bashing extends Behaviour
                 }
                 else
                 {
-                    stepsOfBashing = 2;
+                    t.rabbit.stepsOfBashing = 2;
                     return t.rl(
                         RABBIT_BASHING_RIGHT,
                         RABBIT_BASHING_LEFT
@@ -92,7 +97,7 @@ public class Bashing extends Behaviour
                 );
             }
         }
-        --stepsOfBashing;
+        --t.rabbit.stepsOfBashing;
         return null;
     }
 
@@ -144,23 +149,23 @@ public class Bashing extends Behaviour
     }
 
     @Override
-    public void saveState( Map<String, String> saveState )
+    public void saveState( Map<String, String> saveState , Rabbit rabbit)
     {
         BehaviourState.addToStateIfGtZero(
-            saveState, "Bashing.stepsOfBashing", stepsOfBashing
+            saveState, "Bashing.stepsOfBashing", rabbit.stepsOfBashing
         );
     }
 
     @Override
-    public void restoreFromState( Map<String, String> saveState )
+    public void restoreFromState( Map<String, String> saveState , Rabbit rabbit )
     {
-        stepsOfBashing = BehaviourState.restoreFromState(
-            saveState, "Bashing.stepsOfBashing", stepsOfBashing
+        rabbit.stepsOfBashing = BehaviourState.restoreFromState(
+            saveState, "Bashing.stepsOfBashing", rabbit.stepsOfBashing
         );
 
-        if ( stepsOfBashing > 0 )
+        if ( rabbit.stepsOfBashing > 0 )
         {
-            ++stepsOfBashing;
+            ++rabbit.stepsOfBashing;
         }
     }
 }

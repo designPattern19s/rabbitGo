@@ -10,26 +10,13 @@ import rabbitescape.engine.ChangeDescription.State;
 
 public class Falling extends Behaviour
 {
-    private int heightFallen = 0;
+    public Falling() {
 
-    private final Climbing climbing;
-    private final Brollychuting brollychuting;
-    private final int fatalHeight;
-
-    public Falling( 
-        Climbing climbing, 
-        Brollychuting brollychuting,
-        int fatalHeight 
-    )
-    {
-        this.climbing = climbing;
-        this.brollychuting = brollychuting;
-        this.fatalHeight = fatalHeight;
     }
 
-    public boolean isFallingToDeath()
+    public boolean isFallingToDeath(Rabbit rabbit)
     {
-        return heightFallen > fatalHeight ;
+        return rabbit.heightFallen > rabbit.fatalHeight ;
     }
 
     @Override
@@ -59,6 +46,12 @@ public class Falling extends Behaviour
         return handled;
     }
 
+    @Override
+    public void cancel( Rabbit rabbit )
+    {
+
+    }
+
     private boolean moveRabbit( World world, Rabbit rabbit, State state )
     {
         switch ( state )
@@ -81,7 +74,7 @@ public class Falling extends Behaviour
             case RABBIT_DYING_OF_FALLING_2_SLOPE_RISE_RIGHT:
             case RABBIT_DYING_OF_FALLING_2_SLOPE_RISE_LEFT:
             {
-                heightFallen += 2;
+                rabbit.heightFallen += 2;
                 rabbit.y = rabbit.y + 2;
                 return true;
             }
@@ -94,13 +87,13 @@ public class Falling extends Behaviour
             case RABBIT_FALLING_1_ONTO_RISE_RIGHT:
             case RABBIT_FALLING_1_ONTO_RISE_LEFT:
             {
-                heightFallen += 1;
+                rabbit.heightFallen += 1;
                 rabbit.y = rabbit.y + 1;
                 return true;
             }
             default:
             {
-                heightFallen = 0;
+                rabbit.heightFallen = 0;
                 return false;
             }
         }
@@ -109,9 +102,9 @@ public class Falling extends Behaviour
     @Override
     public boolean checkTriggered( Rabbit rabbit, World world )
     {
-        if (   climbing.abilityActive
+        if (   rabbit.abilityActive_climbing
             || rabbit.state == RABBIT_DIGGING
-            || brollychuting.hasBrolly() )
+            || rabbit.hasAbility_brolly )
         {
             return false;
         }
@@ -160,9 +153,9 @@ public class Falling extends Behaviour
 
         if ( !triggered )
         {
-            if ( heightFallen > fatalHeight )
+            if ( t.rabbit.heightFallen > t.rabbit.fatalHeight )
             {
-                if ( heightFallen % 2 == 0 )
+                if ( t.rabbit.heightFallen % 2 == 0 )
                 {
                     return RABBIT_DYING_OF_FALLING;
                 }
@@ -175,7 +168,7 @@ public class Falling extends Behaviour
         }
 
         if (
-               ( heightFallen + 1 > fatalHeight )              // Going to die
+               ( t.rabbit.heightFallen + 1 > t.rabbit.fatalHeight )              // Going to die
             && (                                               // during step
                    t.isFlat( t.block2Below() )
                 || t.blockBelow() != null
@@ -220,12 +213,12 @@ public class Falling extends Behaviour
             Block twoBelow = t.block2Below();
             if ( twoBelow != null )
             {
-                if (   heightFallen + 1 > fatalHeight
+                if (   t.rabbit.heightFallen + 1 > t.rabbit.fatalHeight
                     && BehaviourTools.isRightRiseSlope( twoBelow ) )
                 {
                     return RABBIT_DYING_OF_FALLING_2_SLOPE_RISE_RIGHT;
                 }
-                if (   heightFallen + 1 > fatalHeight
+                if (   t.rabbit.heightFallen + 1 > t.rabbit.fatalHeight
                     && BehaviourTools.isLeftRiseSlope( twoBelow ) )
                 {
                     return RABBIT_DYING_OF_FALLING_2_SLOPE_RISE_LEFT;
@@ -257,18 +250,18 @@ public class Falling extends Behaviour
     }
 
     @Override
-    public void saveState( Map<String, String> saveState )
+    public void saveState( Map<String, String> saveState, Rabbit rabbit )
     {
         BehaviourState.addToStateIfGtZero(
-            saveState, "Falling.heightFallen", heightFallen
+            saveState, "Falling.heightFallen", rabbit.heightFallen
         );
     }
 
     @Override
-    public void restoreFromState( Map<String, String> saveState )
+    public void restoreFromState( Map<String, String> saveState ,Rabbit rabbit )
     {
-        heightFallen = BehaviourState.restoreFromState(
-            saveState, "Falling.heightFallen", heightFallen
+        rabbit.heightFallen = BehaviourState.restoreFromState(
+            saveState, "Falling.heightFallen", rabbit.heightFallen
         );
     }
 }

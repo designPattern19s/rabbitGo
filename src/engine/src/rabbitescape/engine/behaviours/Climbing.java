@@ -11,13 +11,10 @@ import rabbitescape.engine.ChangeDescription.State;
 
 public class Climbing extends Behaviour
 {
-    boolean hasAbility = false;
-    public boolean abilityActive = false;
-
     @Override
-    public void cancel()
+    public void cancel(Rabbit rabbit)
     {
-        abilityActive = false;
+        rabbit.abilityActive_climbing = false;
     }
 
     @Override
@@ -25,7 +22,13 @@ public class Climbing extends Behaviour
     {
         BehaviourTools t = new BehaviourTools( rabbit, world );
 
-        return !hasAbility && t.pickUpToken( climb, true );
+        return !rabbit.hasAbility_climbing && t.pickUpToken( climb, true );
+    }
+
+    @Override
+    public void cancel()
+    {
+
     }
 
     @Override
@@ -33,10 +36,10 @@ public class Climbing extends Behaviour
     {
         if ( triggered )
         {
-            hasAbility = true;
+            t.rabbit.hasAbility_climbing = true;
         }
 
-        if ( !hasAbility )
+        if ( !t.rabbit.hasAbility_climbing )
         {
             return null;
         }
@@ -91,7 +94,7 @@ public class Climbing extends Behaviour
 
         if ( t.isRoof( aboveBlock ) )
         {
-            abilityActive = false;
+            t.rabbit.abilityActive_climbing = false;
             return t.rl(
                 RABBIT_CLIMBING_RIGHT_BANG_HEAD,
                 RABBIT_CLIMBING_LEFT_BANG_HEAD
@@ -149,7 +152,7 @@ public class Climbing extends Behaviour
             case RABBIT_CLIMBING_RIGHT_START:
             case RABBIT_CLIMBING_LEFT_START:
             {
-                abilityActive = true;
+                rabbit.abilityActive_climbing = true;
                 return true;
             }
             case RABBIT_CLIMBING_RIGHT_END:
@@ -161,19 +164,19 @@ public class Climbing extends Behaviour
                 {
                     rabbit.onSlope = true;
                 }
-                abilityActive = false;
+                rabbit.abilityActive_climbing = false;
                 return true;
             }
             case RABBIT_CLIMBING_RIGHT_CONTINUE_1:
             case RABBIT_CLIMBING_LEFT_CONTINUE_1:
             {
-                abilityActive = true;
+                rabbit.abilityActive_climbing = true;
                 return true;
             }
             case RABBIT_CLIMBING_RIGHT_CONTINUE_2:
             case RABBIT_CLIMBING_LEFT_CONTINUE_2:
             {
-                abilityActive = true;
+                rabbit.abilityActive_climbing = true;
                 --rabbit.y;
                 return true;
             }
@@ -191,26 +194,26 @@ public class Climbing extends Behaviour
     }
 
     @Override
-    public void saveState( Map<String, String> saveState )
+    public void saveState( Map<String, String> saveState, Rabbit rabbit )
     {
         BehaviourState.addToStateIfTrue(
-            saveState, "Climbing.hasAbility", hasAbility
+            saveState, "Climbing.hasAbility", rabbit.hasAbility_climbing
         );
 
         BehaviourState.addToStateIfTrue(
-            saveState, "Climbing.abilityActive", abilityActive
+            saveState, "Climbing.abilityActive", rabbit.abilityActive_climbing
         );
     }
 
     @Override
-    public void restoreFromState( Map<String, String> saveState )
+    public void restoreFromState( Map<String, String> saveState, Rabbit rabbit )
     {
-        hasAbility = BehaviourState.restoreFromState(
-            saveState, "Climbing.hasAbility", hasAbility
+        rabbit.hasAbility_climbing = BehaviourState.restoreFromState(
+            saveState, "Climbing.hasAbility", rabbit.hasAbility_climbing
         );
 
-        abilityActive = BehaviourState.restoreFromState(
-            saveState, "Climbing.abilityActive", abilityActive
+        rabbit.abilityActive_blocking = BehaviourState.restoreFromState(
+            saveState, "Climbing.abilityActive", rabbit.abilityActive_climbing
         );
     }
 }
