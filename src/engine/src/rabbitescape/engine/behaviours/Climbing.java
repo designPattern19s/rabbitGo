@@ -20,7 +20,8 @@ public class Climbing extends Behaviour
     @Override
     public boolean checkTriggered( Rabbit rabbit, World world )
     {
-        BehaviourTools t = new BehaviourTools( rabbit, world );
+        BehaviourTools t = BehaviourTools.getInstance( rabbit, world );
+        t.initialize( rabbit, world );
 
         return !rabbit.hasAbility_climbing && t.pickUpToken( climb, true );
     }
@@ -140,7 +141,8 @@ public class Climbing extends Behaviour
     @Override
     public boolean behave( World world, Rabbit rabbit, State state )
     {
-        BehaviourTools t = new BehaviourTools( rabbit, world );
+        BehaviourTools t = BehaviourTools.getInstance( rabbit, world );
+        t.initialize( rabbit, world );
 
         if( t.rabbitIsClimbing() )
         { // Can't be both on a wall and on a slope.

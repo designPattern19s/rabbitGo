@@ -1,0 +1,35 @@
+Index: .idea/modules.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<project version=\"4\">\n  <component name=\"ProjectModuleManager\">\n    <modules>\n      <module fileurl=\"file://$PROJECT_DIR$/src/engine/src/engine.iml\" filepath=\"$PROJECT_DIR$/src/engine/src/engine.iml\" />\n      <module fileurl=\"file://$PROJECT_DIR$/src/render/src/render.iml\" filepath=\"$PROJECT_DIR$/src/render/src/render.iml\" />\n<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<project version=\"4\">\n  <component name=\"ProjectModuleManager\">\n    <modules>\n      <module fileurl=\"file://$PROJECT_DIR$/src/engine/src/engine.iml\" filepath=\"$PROJECT_DIR$/src/engine/src/engine.iml\" />\n      <module fileurl=\"file://$PROJECT_DIR$/src/render/src/render.iml\" filepath=\"$PROJECT_DIR$/src/render/src/render.iml\" />\n      <module fileurl=\"file://$PROJECT_DIR$/src/ui-swing/src/ui-swing.iml\" filepath=\"$PROJECT_DIR$/src/ui-swing/src/ui-swing.iml\" />\n      <module fileurl=\"file://$PROJECT_DIR$/src/ui-text/src/ui-text.iml\" filepath=\"$PROJECT_DIR$/src/ui-text/src/ui-text.iml\" />\n    </modules>\n  </component>\n</project>\n      <module fileurl=\"file://$PROJECT_DIR$/src/ui-swing/src/ui-swing.iml\" filepath=\"$PROJECT_DIR$/src/ui-swing/src/ui-swing.iml\" />\n      <module fileurl=\"file://$PROJECT_DIR$/src/ui-text/src/ui-text.iml\" filepath=\"$PROJECT_DIR$/src/ui-text/src/ui-text.iml\" />\n    </modules>\n  </component>\n</project>\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/modules.xml b/.idea/modules.xml
+--- a/.idea/modules.xml	(revision dc2f8c97ad6ea50a797552403400970ac3c3ac5b)
++++ b/.idea/modules.xml	(date 1733232580519)
+@@ -2,21 +2,7 @@
+ <project version="4">
+   <component name="ProjectModuleManager">
+     <modules>
+-      <module fileurl="file://$PROJECT_DIR$/src/engine/src/engine.iml" filepath="$PROJECT_DIR$/src/engine/src/engine.iml" />
+-      <module fileurl="file://$PROJECT_DIR$/src/render/src/render.iml" filepath="$PROJECT_DIR$/src/render/src/render.iml" />
+-<?xml version="1.0" encoding="UTF-8"?>
+-<project version="4">
+-  <component name="ProjectModuleManager">
+-    <modules>
+-      <module fileurl="file://$PROJECT_DIR$/src/engine/src/engine.iml" filepath="$PROJECT_DIR$/src/engine/src/engine.iml" />
+-      <module fileurl="file://$PROJECT_DIR$/src/render/src/render.iml" filepath="$PROJECT_DIR$/src/render/src/render.iml" />
+-      <module fileurl="file://$PROJECT_DIR$/src/ui-swing/src/ui-swing.iml" filepath="$PROJECT_DIR$/src/ui-swing/src/ui-swing.iml" />
+-      <module fileurl="file://$PROJECT_DIR$/src/ui-text/src/ui-text.iml" filepath="$PROJECT_DIR$/src/ui-text/src/ui-text.iml" />
+-    </modules>
+-  </component>
+-</project>
+-      <module fileurl="file://$PROJECT_DIR$/src/ui-swing/src/ui-swing.iml" filepath="$PROJECT_DIR$/src/ui-swing/src/ui-swing.iml" />
+-      <module fileurl="file://$PROJECT_DIR$/src/ui-text/src/ui-text.iml" filepath="$PROJECT_DIR$/src/ui-text/src/ui-text.iml" />
++      <module fileurl="file://$PROJECT_DIR$/.idea/rabbitGo.iml" filepath="$PROJECT_DIR$/.idea/rabbitGo.iml" />
+     </modules>
+   </component>
+-</project>
++</project>
+\ No newline at end of file

@@ -109,7 +109,8 @@ public class Falling extends Behaviour
             return false;
         }
 
-        BehaviourTools t = new BehaviourTools( rabbit, world );
+        BehaviourTools t = BehaviourTools.getInstance( rabbit, world );
+        t.initialize( rabbit, world );
 
         //noinspection RedundantIfStatement
         if ( t.isFlat( t.blockBelow() ) )

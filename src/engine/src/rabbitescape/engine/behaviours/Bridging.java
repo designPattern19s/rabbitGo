@@ -27,7 +27,8 @@ public class Bridging extends Behaviour
         if ( rabbit.bigSteps <= 0 )
             // Only pick up a token if we've finished, and we can bridge
         {
-            BehaviourTools t = new BehaviourTools( rabbit, world );
+            BehaviourTools t = BehaviourTools.getInstance( rabbit, world );
+            t.initialize( rabbit, world );
 
             State possibleState = bridgingState( t, 3, 3, rabbit.bridgeType );
 

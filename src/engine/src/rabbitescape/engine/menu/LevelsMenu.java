@@ -71,7 +71,8 @@ public class LevelsMenu extends Menu
 
         for ( IdxObj<MenuItem> item : enumerate1( items ) )
         {
-            item.object.enabled = ( item.index <= lastEnabled );
+//            item.object.enabled = ( item.index <= lastEnabled );
+            item.object.enabled = true;
         }
     }
 }

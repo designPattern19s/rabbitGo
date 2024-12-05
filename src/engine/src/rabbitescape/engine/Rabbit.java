@@ -155,9 +155,10 @@ public class Rabbit extends Thing implements Comparable<Rabbit>
         boolean done = false;
         for ( Behaviour behaviour : behaviours )
         {
-
+            BehaviourTools b = BehaviourTools.getInstance( this, world );
+            b.initialize( this, world );
             State thisState = behaviour.newState(
-                new BehaviourTools( this, world ), behaviour.triggered );
+                b, behaviour.triggered );
 
             if ( thisState != null && !done )
             {
@@ -185,7 +186,8 @@ public class Rabbit extends Thing implements Comparable<Rabbit>
         {
             return;
         }
-        BehaviourTools t = new BehaviourTools( this, world );
+        BehaviourTools t = BehaviourTools.getInstance( this, world );
+        t.initialize( this, world );
         if ( t.blockHere() != null ||
             !BehaviourTools.isSlope( t.blockBelow() ) )
         {

@@ -95,7 +95,8 @@ public class Brollychuting extends Behaviour
     @Override
     public boolean checkTriggered( Rabbit rabbit, World world )
     {
-        BehaviourTools t = new BehaviourTools( rabbit, world );
+        BehaviourTools t = BehaviourTools.getInstance( rabbit, world );
+        t.initialize( rabbit, world );
 
         if ( !rabbit.hasAbility_brolly && t.pickUpToken( brolly, true ) )
         {
