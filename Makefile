@@ -76,6 +76,8 @@ clean: levels.mk-clean-levels levels.mk-clean-animations
 
 clean-all: clean images.mk-clean sounds.mk-clean-sounds sounds.mk-clean-music clean-doxygen clean-android
 
+clean-images: clean images.mk-clean
+
 remove-trailing:
 	git status --porcelain | sed 's_^...__' | grep '\.java$$' - | xargs perl -p -i -e 's/[ \t]+$$//'
 

@@ -30,7 +30,9 @@ public class Token extends Thing
         block,
         climb,
         explode,
-        brolly
+        brolly,
+        pause,
+        tempBlock
     }
 
     public final Type type;
@@ -88,6 +90,26 @@ public class Token extends Thing
                 TOKEN_BRIDGE_FALL_TO_SLOPE, 
                 TOKEN_BRIDGE_ON_SLOPE
                 );
+
+            case tempBlock: return chooseState(
+                moving,
+                slopeBelow,
+                onSlope,
+                TOKEN_TEMP_BLOCK_FALLING,
+                TOKEN_TEMP_BLOCK_STILL,
+                TOKEN_TEMP_BLOCK_FALL_TO_SLOPE,
+                TOKEN_TEMP_BLOCK_ON_SLOPE
+            );
+
+            case pause: return chooseState(
+                moving,
+                slopeBelow,
+                onSlope,
+                TOKEN_PAUSE_FALLING,
+                TOKEN_PAUSE_STILL,
+                TOKEN_PAUSE_FALL_TO_SLOPE,
+                TOKEN_PAUSE_ON_SLOPE
+            );
 
             case block: return chooseState( 
                 moving, 
@@ -193,6 +215,10 @@ public class Token extends Thing
         case TOKEN_EXPLODE_FALLING:
         case TOKEN_BROLLY_FALLING:
         case TOKEN_BROLLY_FALL_TO_SLOPE:
+        case TOKEN_TEMP_BLOCK_FALLING:
+        case TOKEN_TEMP_BLOCK_FALL_TO_SLOPE:
+        case TOKEN_PAUSE_FALLING:
+        case TOKEN_PAUSE_FALL_TO_SLOPE:
         {
             ++y;
 

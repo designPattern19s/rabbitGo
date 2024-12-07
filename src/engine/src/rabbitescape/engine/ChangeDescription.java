@@ -53,39 +53,59 @@ public class ChangeDescription
         RABBIT_FALLING,
         RABBIT_FALLING_1,
 
-        /** The flat block is two squares below where this starts.*/
+        /**
+         * The flat block is two squares below where this starts.
+         */
         RABBIT_FALLING_1_TO_DEATH,
 
-        /** Part 2 of the animation for RABBIT_FALLING_1_TO_DEATH.*/
+        /**
+         * Part 2 of the animation for RABBIT_FALLING_1_TO_DEATH.
+         */
         RABBIT_DYING_OF_FALLING_2,
 
-        /** The rabbit starts on the death square.*/
+        /**
+         * The rabbit starts on the death square.
+         */
         RABBIT_DYING_OF_FALLING,
 
-        /** The slope is one square below where this starts. */
+        /**
+         * The slope is one square below where this starts.
+         */
         RABBIT_DYING_OF_FALLING_SLOPE_RISE_LEFT,
 
-        /** Part 2 of the animation for
-         *  RABBIT_DYING_OF_FALLING_SLOPE_RISE_LEFT */
+        /**
+         * Part 2 of the animation for RABBIT_DYING_OF_FALLING_SLOPE_RISE_LEFT
+         */
         RABBIT_DYING_OF_FALLING_SLOPE_RISE_LEFT_2,
 
-        /** The slope is two squares below where this starts. */
+        /**
+         * The slope is two squares below where this starts.
+         */
         RABBIT_DYING_OF_FALLING_2_SLOPE_RISE_LEFT,
 
-        /** Part 2 of RABBIT_DYING_OF_FALLING_2_SLOPE_RISE_RIGHT. */
+        /**
+         * Part 2 of RABBIT_DYING_OF_FALLING_2_SLOPE_RISE_RIGHT.
+         */
         RABBIT_DYING_OF_FALLING_2_SLOPE_RISE_LEFT_2,
 
-        /** The slope is one square below where this starts. */
+        /**
+         * The slope is one square below where this starts.
+         */
         RABBIT_DYING_OF_FALLING_SLOPE_RISE_RIGHT,
 
-        /** Part 2 of the animation for
-         *  RABBIT_DYING_OF_FALLING_SLOPE_RISE_RIGHT */
+        /**
+         * Part 2 of the animation for RABBIT_DYING_OF_FALLING_SLOPE_RISE_RIGHT
+         */
         RABBIT_DYING_OF_FALLING_SLOPE_RISE_RIGHT_2,
 
-        /** The slope is two squares below where this starts. */
+        /**
+         * The slope is two squares below where this starts.
+         */
         RABBIT_DYING_OF_FALLING_2_SLOPE_RISE_RIGHT,
 
-        /** Part 2 of RABBIT_DYING_OF_FALLING_2_SLOPE_RISE_RIGHT. */
+        /**
+         * Part 2 of RABBIT_DYING_OF_FALLING_2_SLOPE_RISE_RIGHT.
+         */
         RABBIT_DYING_OF_FALLING_2_SLOPE_RISE_RIGHT_2,
 
         RABBIT_FALLING_ONTO_LOWER_RIGHT,
@@ -170,6 +190,10 @@ public class ChangeDescription
 
         RABBIT_DROWNING,
 
+        RABBIT_PAUSING,
+        RABBIT_PAUSING_RISE_RIGHT,
+        RABBIT_PAUSING_RISE_LEFT,
+
         RABBIT_BLOCKING,
         RABBIT_BLOCKING_RISE_RIGHT,
         RABBIT_BLOCKING_RISE_LEFT,
@@ -212,6 +236,16 @@ public class ChangeDescription
         TOKEN_BROLLY_STILL,
         TOKEN_BROLLY_FALL_TO_SLOPE,
         TOKEN_BROLLY_ON_SLOPE,
+
+        TOKEN_TEMP_BLOCK_FALLING,
+        TOKEN_TEMP_BLOCK_STILL,
+        TOKEN_TEMP_BLOCK_FALL_TO_SLOPE,
+        TOKEN_TEMP_BLOCK_ON_SLOPE,
+
+        TOKEN_PAUSE_FALLING,
+        TOKEN_PAUSE_STILL,
+        TOKEN_PAUSE_FALL_TO_SLOPE,
+        TOKEN_PAUSE_ON_SLOPE,
 
         WATER_REGION,
         WATER_REGION_HALF,
