@@ -8,6 +8,25 @@ import rabbitescape.engine.ChangeDescription.State;
 
 public class Exploding extends Behaviour
 {
+    private static Exploding instance;
+
+    public static Exploding getInstance() {
+        if (instance == null) {
+            instance = new Exploding();
+        }
+        return instance;
+    }
+
+    public void getVariables(RabbitBehaviourVariables vars) {
+
+    }
+
+    public void saveVariables(RabbitBehaviourVariables vars)
+    {
+
+    }
+
+
     @Override
     public void cancel()
     {

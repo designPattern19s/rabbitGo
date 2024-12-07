@@ -12,19 +12,29 @@ public class Falling extends Behaviour
 {
     private int heightFallen = 0;
 
-    private final Climbing climbing;
-    private final Brollychuting brollychuting;
-    private final int fatalHeight;
+    private boolean ClimbingHasAbility=false;
+    private boolean BrollyChutingHasAbility=false;
+    private int fatalHeight;
+    private static Falling instance;
 
-    public Falling( 
-        Climbing climbing, 
-        Brollychuting brollychuting,
-        int fatalHeight 
-    )
+    public static Falling getInstance() {
+        if (instance == null) {
+            instance = new Falling();
+        }
+        return instance;
+    }
+
+    public void getVariables(RabbitBehaviourVariables vars) {
+        ClimbingHasAbility = vars.hasAbility_climbing;
+        BrollyChutingHasAbility = vars.hasAbility_brolly;
+        fatalHeight = vars.fatalHeight;
+    }
+
+    public void saveVariables(RabbitBehaviourVariables vars)
     {
-        this.climbing = climbing;
-        this.brollychuting = brollychuting;
-        this.fatalHeight = fatalHeight;
+        vars.hasAbility_climbing = ClimbingHasAbility;
+        vars.hasAbility_brolly = BrollyChutingHasAbility;
+        vars.fatalHeight = fatalHeight;
     }
 
     public boolean isFallingToDeath()
@@ -109,9 +119,9 @@ public class Falling extends Behaviour
     @Override
     public boolean checkTriggered( Rabbit rabbit, World world )
     {
-        if (   climbing.abilityActive
+        if (   ClimbingHasAbility
             || rabbit.state == RABBIT_DIGGING
-            || brollychuting.hasBrolly() )
+            || BrollyChutingHasAbility )
         {
             return false;
         }

@@ -33,6 +33,8 @@ public class Rabbit extends Thing implements Comparable<Rabbit>
     public boolean slopeBashHop = false;
     public final Type type;
 
+    public RabbitBehaviourVariables behaviourVariables;
+
     public Rabbit( int x, int y, Direction dir, Type type )
     {
         super( x, y, RABBIT_WALKING_LEFT );
@@ -43,25 +45,26 @@ public class Rabbit extends Thing implements Comparable<Rabbit>
         behavioursTriggerOrder = new ArrayList<>();
         createBehaviours();
         index = NOT_INDEXED;
+        behaviourVariables = new RabbitBehaviourVariables(getFatalHeight());
     }
 
     private void createBehaviours()
     {
-        Climbing climbing = new Climbing();
-        Digging digging = new Digging();
-        Exploding exploding = new Exploding();
-        Burning burning = new Burning();
-        OutOfBounds outOfBounds = new OutOfBounds();
-        Drowning drowning = new Drowning();
-        Exiting exiting = new Exiting();
-        Brollychuting brollychuting = new Brollychuting( climbing, digging );
-        falling = new Falling( climbing, brollychuting, getFatalHeight() );
-        Bashing bashing = new Bashing();
-        Bridging bridging = new Bridging();
-        Blocking blocking = new Blocking();
-        Walking walking = new Walking();
-        RabbotCrash rabbotCrash = new RabbotCrash();
-        RabbotWait rabbotWait = new RabbotWait();
+        Climbing climbing = Climbing.getInstance();
+        Digging digging = Digging.getInstance();
+        Exploding exploding = Exploding.getInstance();
+        Burning burning = Burning.getInstance();
+        OutOfBounds outOfBounds = OutOfBounds.getInstance();
+        Drowning drowning = Drowning.getInstance();
+        Exiting exiting = Exiting.getInstance();
+        Brollychuting brollychuting = Brollychuting.getInstance();
+        falling = Falling.getInstance();
+        Bashing bashing = Bashing.getInstance();
+        Bridging bridging = Bridging.getInstance();
+        Blocking blocking = Blocking.getInstance();
+        Walking walking = Walking.getInstance();
+        RabbotCrash rabbotCrash = RabbotCrash.getInstance();
+        RabbotWait rabbotWait = RabbotWait.getInstance();
 
         behavioursTriggerOrder.add( exploding );
         behavioursTriggerOrder.add( outOfBounds );
@@ -113,7 +116,9 @@ public class Rabbit extends Thing implements Comparable<Rabbit>
 
         for ( Behaviour behaviour : behavioursTriggerOrder )
         {
+            behaviour.getVariables( behaviourVariables );
             behaviour.triggered = behaviour.checkTriggered( this, world );
+            behaviour.saveVariables( behaviourVariables );
             if ( behaviour.triggered )
             {
                 cancelAllBehavioursExcept( behaviour );
@@ -123,10 +128,10 @@ public class Rabbit extends Thing implements Comparable<Rabbit>
         boolean done = false;
         for ( Behaviour behaviour : behaviours )
         {
-
+            behaviour.getVariables( behaviourVariables );
             State thisState = behaviour.newState(
                 new BehaviourTools( this, world ), behaviour.triggered );
-
+            behaviour.saveVariables( behaviourVariables );
             if ( thisState != null && !done )
             {
                 state = thisState;
@@ -142,7 +147,9 @@ public class Rabbit extends Thing implements Comparable<Rabbit>
         {
             if ( behaviour != exception )
             {
+                behaviour.getVariables( behaviourVariables );
                 behaviour.cancel();
+                behaviour.saveVariables( behaviourVariables );
             }
         }
     }
@@ -168,7 +175,9 @@ public class Rabbit extends Thing implements Comparable<Rabbit>
     {
         for ( Behaviour behaviour : behaviours )
         {
+            behaviour.getVariables( behaviourVariables );
             boolean handled = behaviour.behave( world, this, state );
+            behaviour.saveVariables( behaviourVariables );
             if ( handled )
             {
                 break;
@@ -190,7 +199,9 @@ public class Rabbit extends Thing implements Comparable<Rabbit>
 
         for ( Behaviour behaviour : behaviours )
         {
+            behaviour.getVariables( behaviourVariables );
             behaviour.saveState( ret );
+            behaviour.saveVariables( behaviourVariables );
         }
 
         return ret;
@@ -207,7 +218,9 @@ public class Rabbit extends Thing implements Comparable<Rabbit>
 
         for ( Behaviour behaviour : behaviours )
         {
+            behaviour.getVariables( behaviourVariables );
             behaviour.restoreFromState( state );
+            behaviour.saveVariables( behaviourVariables );
         }
     }
 

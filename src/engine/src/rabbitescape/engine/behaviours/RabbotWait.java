@@ -1,14 +1,29 @@
 package rabbitescape.engine.behaviours;
 
-import rabbitescape.engine.Behaviour;
-import rabbitescape.engine.BehaviourTools;
+import rabbitescape.engine.*;
 import rabbitescape.engine.ChangeDescription.State;
-import rabbitescape.engine.Direction;
-import rabbitescape.engine.Rabbit;
-import rabbitescape.engine.World;
 
 public class RabbotWait extends Behaviour
 {
+    private static RabbotWait instance;
+
+    public static RabbotWait getInstance() {
+        if (instance == null) {
+            instance = new RabbotWait();
+        }
+        return instance;
+    }
+
+    public void getVariables( RabbitBehaviourVariables vars) {
+
+    }
+
+    public void saveVariables(RabbitBehaviourVariables vars)
+    {
+
+    }
+
+
     private boolean within1Vertically( Rabbit otherRabbit, Rabbit rabbit )
     {
         return ( Math.abs( otherRabbit.y - rabbit.y ) < 2 );

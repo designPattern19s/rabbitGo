@@ -3,16 +3,29 @@ package rabbitescape.engine.behaviours;
 import static rabbitescape.engine.CellularDirection.DOWN;
 import static rabbitescape.engine.CellularDirection.UP;
 
-import rabbitescape.engine.Behaviour;
-import rabbitescape.engine.BehaviourTools;
-import rabbitescape.engine.CellularDirection;
+import rabbitescape.engine.*;
 import rabbitescape.engine.ChangeDescription.State;
-import rabbitescape.engine.Rabbit;
-import rabbitescape.engine.WaterRegion;
-import rabbitescape.engine.World;
 
 public class Drowning extends Behaviour
 {
+    private static Drowning instance;
+
+    public static Drowning getInstance() {
+        if (instance == null) {
+            instance = new Drowning();
+        }
+        return instance;
+    }
+
+    public void getVariables( RabbitBehaviourVariables vars) {
+
+    }
+
+    public void saveVariables(RabbitBehaviourVariables vars)
+    {
+
+    }
+
     @Override
     public void cancel()
     {

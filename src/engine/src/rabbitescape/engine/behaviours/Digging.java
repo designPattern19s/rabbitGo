@@ -11,6 +11,24 @@ import rabbitescape.engine.ChangeDescription.State;
 public class Digging extends Behaviour
 {
     int stepsOfDigging;
+    private static Digging instance;
+
+    public static Digging getInstance() {
+        if (instance == null) {
+            instance = new Digging();
+        }
+        return instance;
+    }
+
+    public void getVariables(RabbitBehaviourVariables vars) {
+        stepsOfDigging = vars.stepsOfDigging;
+    }
+
+    public void saveVariables(RabbitBehaviourVariables vars)
+    {
+        vars.stepsOfDigging = stepsOfDigging;
+    }
+
 
     @Override
     public void cancel()

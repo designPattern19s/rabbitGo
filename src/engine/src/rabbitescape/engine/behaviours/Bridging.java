@@ -12,16 +12,37 @@ import rabbitescape.engine.ChangeDescription.State;
 
 public class Bridging extends Behaviour
 {
-    enum BridgeType
+    public enum BridgeType
     {
         ALONG,
         UP,
         DOWN_UP
     }
 
+    private static Bridging instance;
     private int smallSteps = 0;
     private int bigSteps = 0;
     private BridgeType bridgeType = BridgeType.ALONG;
+
+    public static Bridging getInstance() {
+        if (instance == null) {
+            instance = new Bridging();
+        }
+        return instance;
+    }
+
+    public void getVariables(RabbitBehaviourVariables vars) {
+        smallSteps = vars.smallSteps;
+        bigSteps = vars.bigSteps;
+        bridgeType = vars.bridgeType;
+    }
+
+    public void saveVariables(RabbitBehaviourVariables vars)
+    {
+        vars.smallSteps = smallSteps;
+        vars.bigSteps = bigSteps;
+        vars.bridgeType = bridgeType;
+    }
 
     @Override
     public void cancel()

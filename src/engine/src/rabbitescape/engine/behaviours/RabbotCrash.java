@@ -1,13 +1,29 @@
 package rabbitescape.engine.behaviours;
 
-import rabbitescape.engine.Behaviour;
-import rabbitescape.engine.BehaviourTools;
+import rabbitescape.engine.*;
 import rabbitescape.engine.ChangeDescription.State;
-import rabbitescape.engine.Rabbit;
-import rabbitescape.engine.World;
 
 public class RabbotCrash extends Behaviour
 {
+    private static RabbotCrash instance;
+
+    public static RabbotCrash getInstance() {
+        if (instance == null) {
+            instance = new RabbotCrash();
+        }
+        return instance;
+    }
+
+    public void getVariables( RabbitBehaviourVariables vars) {
+
+    }
+
+    public void saveVariables(RabbitBehaviourVariables vars)
+    {
+
+    }
+
+
     @Override
     public void cancel()
     {

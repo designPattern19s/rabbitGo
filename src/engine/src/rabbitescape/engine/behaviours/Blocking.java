@@ -11,6 +11,24 @@ import rabbitescape.engine.ChangeDescription.State;
 public class Blocking extends Behaviour
 {
     public boolean abilityActive = false;
+    private static Blocking instance;
+
+    public static Blocking getInstance() {
+        if (instance == null) {
+            instance = new Blocking();
+        }
+        return instance;
+    }
+
+    public void getVariables(RabbitBehaviourVariables vars) {
+        abilityActive = vars.abilityActive_blocking;
+    }
+
+    public void saveVariables(RabbitBehaviourVariables vars)
+    {
+        vars.abilityActive_blocking = abilityActive;
+    }
+
 
     @Override
     public void cancel()

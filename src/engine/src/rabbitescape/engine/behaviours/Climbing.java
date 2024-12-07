@@ -11,8 +11,27 @@ import rabbitescape.engine.ChangeDescription.State;
 
 public class Climbing extends Behaviour
 {
+    private static Climbing instance;
     boolean hasAbility = false;
     public boolean abilityActive = false;
+
+    public static Climbing getInstance() {
+        if (instance == null) {
+            instance = new Climbing();
+        }
+        return instance;
+    }
+
+    public void getVariables(RabbitBehaviourVariables vars) {
+        hasAbility = vars.hasAbility_climbing;
+        abilityActive = vars.hasAbility_climbing;
+    }
+
+    public void saveVariables(RabbitBehaviourVariables vars)
+    {
+        vars.hasAbility_climbing = hasAbility;
+        vars.abilityActive_climbing = abilityActive;
+    }
 
     @Override
     public void cancel()

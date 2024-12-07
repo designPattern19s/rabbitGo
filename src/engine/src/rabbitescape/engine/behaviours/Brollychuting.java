@@ -5,24 +5,34 @@ import static rabbitescape.engine.Token.Type.brolly;
 
 import java.util.Map;
 
-import rabbitescape.engine.Behaviour;
-import rabbitescape.engine.BehaviourState;
-import rabbitescape.engine.BehaviourTools;
-import rabbitescape.engine.Block;
+import rabbitescape.engine.*;
 import rabbitescape.engine.ChangeDescription.State;
-import rabbitescape.engine.Rabbit;
-import rabbitescape.engine.World;
 
 public class Brollychuting extends Behaviour
 {
+    private static Brollychuting instance;
     boolean hasAbility = false;
-    private final Climbing climbing;
-    private final Digging digging;
+    boolean climbingAbilityActivate = false;
+    int diggingStepsOfDigging = 0;
 
-    public Brollychuting( Climbing climbing, Digging digging )
+    public static Brollychuting getInstance() {
+        if (instance == null) {
+            instance = new Brollychuting();
+        }
+        return instance;
+    }
+
+    public void getVariables( RabbitBehaviourVariables vars) {
+        hasAbility = vars.hasAbility_brolly;
+        climbingAbilityActivate = vars.hasAbility_climbing;
+        diggingStepsOfDigging = vars.stepsOfDigging;
+    }
+
+    public void saveVariables(RabbitBehaviourVariables vars)
     {
-        this.climbing = climbing;
-        this.digging = digging;
+        vars.hasAbility_brolly = hasAbility;
+        vars.hasAbility_climbing = climbingAbilityActivate;
+        vars.stepsOfDigging = diggingStepsOfDigging;
     }
 
     @Override
@@ -38,7 +48,7 @@ public class Brollychuting extends Behaviour
             return null;
         }
 
-        if ( climbing.abilityActive )
+        if ( climbingAbilityActivate )
         {
             return null;
         }
@@ -110,7 +120,7 @@ public class Brollychuting extends Behaviour
             return false;
         }
 
-        if ( climbing.abilityActive || digging.stepsOfDigging > 2 )
+        if ( climbingAbilityActivate || diggingStepsOfDigging > 2 )
         {
             return false;
         }

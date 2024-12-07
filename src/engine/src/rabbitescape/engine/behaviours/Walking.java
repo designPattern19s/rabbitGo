@@ -9,6 +9,25 @@ import rabbitescape.engine.ChangeDescription.State;
 
 public class Walking extends Behaviour
 {
+    private static Walking instance;
+
+    public void getVariables(RabbitBehaviourVariables vars) {
+
+    }
+
+    public void saveVariables(RabbitBehaviourVariables vars)
+    {
+
+    }
+
+    public static Walking getInstance() {
+        if (instance == null) {
+            instance = new Walking();
+        }
+        return instance;
+    }
+
+
     @Override
     public void cancel()
     {

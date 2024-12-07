@@ -2,14 +2,30 @@ package rabbitescape.engine.behaviours;
 
 import static rabbitescape.engine.ChangeDescription.State.*;
 
-import rabbitescape.engine.Behaviour;
-import rabbitescape.engine.BehaviourTools;
+import rabbitescape.engine.*;
 import rabbitescape.engine.ChangeDescription.State;
-import rabbitescape.engine.Rabbit;
-import rabbitescape.engine.World;
 
 public class Burning extends Behaviour
 {
+    private static Burning instance;
+
+    public static Burning getInstance() {
+        if (instance == null) {
+            instance = new Burning();
+        }
+        return instance;
+    }
+
+    public void getVariables( RabbitBehaviourVariables vars) {
+
+    }
+
+    public void saveVariables(RabbitBehaviourVariables vars)
+    {
+
+    }
+
+
     @Override
     public void cancel()
     {

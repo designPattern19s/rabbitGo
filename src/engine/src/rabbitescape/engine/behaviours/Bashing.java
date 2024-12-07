@@ -12,6 +12,24 @@ import rabbitescape.engine.ChangeDescription.State;
 public class Bashing extends Behaviour
 {
     private int stepsOfBashing;
+    private static Bashing instance;
+
+    public static Bashing getInstance() {
+        if (instance == null) {
+            instance = new Bashing();
+        }
+        return instance;
+    }
+
+    public void getVariables(RabbitBehaviourVariables vars) {
+        stepsOfBashing = vars.stepsOfBashing;
+    }
+
+    public void saveVariables(RabbitBehaviourVariables vars)
+    {
+        vars.stepsOfBashing = stepsOfBashing;
+    }
+
 
     @Override
     public void cancel()
