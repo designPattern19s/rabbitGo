@@ -16,6 +16,8 @@ public class Burning extends Behaviour
         return instance;
     }
 
+    private Burning(){}
+
     public void getVariables( RabbitBehaviourVariables vars) {
 
     }

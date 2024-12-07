@@ -24,6 +24,8 @@ public class Bridging extends Behaviour
     private int bigSteps = 0;
     private BridgeType bridgeType = BridgeType.ALONG;
 
+    private Bridging(){ }
+
     public static Bridging getInstance() {
         if (instance == null) {
             instance = new Bridging();

@@ -15,6 +15,8 @@ public class Climbing extends Behaviour
     boolean hasAbility = false;
     public boolean abilityActive = false;
 
+    private Climbing(){}
+
     public static Climbing getInstance() {
         if (instance == null) {
             instance = new Climbing();

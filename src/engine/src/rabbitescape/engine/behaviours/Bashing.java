@@ -14,6 +14,8 @@ public class Bashing extends Behaviour
     private int stepsOfBashing;
     private static Bashing instance;
 
+    private Bashing(){ }
+
     public static Bashing getInstance() {
         if (instance == null) {
             instance = new Bashing();

@@ -7,6 +7,8 @@ public class RabbotWait extends Behaviour
 {
     private static RabbotWait instance;
 
+    private RabbotWait(){}
+
     public static RabbotWait getInstance() {
         if (instance == null) {
             instance = new RabbotWait();

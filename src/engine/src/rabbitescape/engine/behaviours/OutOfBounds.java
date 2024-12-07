@@ -10,6 +10,8 @@ public class OutOfBounds extends Behaviour
 {
     private static OutOfBounds instance;
 
+    private OutOfBounds(){}
+
     public static OutOfBounds getInstance() {
         if (instance == null) {
             instance = new OutOfBounds();

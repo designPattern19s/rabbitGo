@@ -7,6 +7,8 @@ public class RabbotCrash extends Behaviour
 {
     private static RabbotCrash instance;
 
+    private RabbotCrash(){}
+
     public static RabbotCrash getInstance() {
         if (instance == null) {
             instance = new RabbotCrash();

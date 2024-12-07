@@ -11,6 +11,8 @@ public class Walking extends Behaviour
 {
     private static Walking instance;
 
+    private Walking(){}
+
     public void getVariables(RabbitBehaviourVariables vars) {
 
     }

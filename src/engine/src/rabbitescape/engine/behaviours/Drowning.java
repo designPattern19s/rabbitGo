@@ -10,6 +10,8 @@ public class Drowning extends Behaviour
 {
     private static Drowning instance;
 
+    private Drowning(){}
+
     public static Drowning getInstance() {
         if (instance == null) {
             instance = new Drowning();

@@ -15,6 +15,8 @@ public class Brollychuting extends Behaviour
     boolean climbingAbilityActivate = false;
     int diggingStepsOfDigging = 0;
 
+    private Brollychuting(){ }
+
     public static Brollychuting getInstance() {
         if (instance == null) {
             instance = new Brollychuting();

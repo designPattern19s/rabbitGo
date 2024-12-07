@@ -17,6 +17,8 @@ public class Falling extends Behaviour
     private int fatalHeight;
     private static Falling instance;
 
+    private Falling(){}
+
     public static Falling getInstance() {
         if (instance == null) {
             instance = new Falling();

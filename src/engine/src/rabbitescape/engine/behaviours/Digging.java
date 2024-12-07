@@ -13,6 +13,8 @@ public class Digging extends Behaviour
     int stepsOfDigging;
     private static Digging instance;
 
+    private Digging(){}
+
     public static Digging getInstance() {
         if (instance == null) {
             instance = new Digging();

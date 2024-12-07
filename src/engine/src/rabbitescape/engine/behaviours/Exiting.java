@@ -9,6 +9,8 @@ public class Exiting extends Behaviour
 {
     private static Exiting instance;
 
+    private Exiting(){}
+
     public static Exiting getInstance() {
         if (instance == null) {
             instance = new Exiting();

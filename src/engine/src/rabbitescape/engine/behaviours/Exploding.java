@@ -10,6 +10,8 @@ public class Exploding extends Behaviour
 {
     private static Exploding instance;
 
+    private Exploding(){}
+
     public static Exploding getInstance() {
         if (instance == null) {
             instance = new Exploding();

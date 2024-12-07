@@ -13,6 +13,8 @@ public class Blocking extends Behaviour
     public boolean abilityActive = false;
     private static Blocking instance;
 
+    private Blocking(){ }
+
     public static Blocking getInstance() {
         if (instance == null) {
             instance = new Blocking();
