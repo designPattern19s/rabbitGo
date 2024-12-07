@@ -65,8 +65,8 @@ public class Rabbit extends Thing implements Comparable<Rabbit>
         Walking walking = Walking.getInstance();
         RabbotCrash rabbotCrash = RabbotCrash.getInstance();
         RabbotWait rabbotWait = RabbotWait.getInstance();
-        Pause pause = new Pause();
-        TempBlocking tempBlocking = new TempBlocking();
+        Pause pause = Pause.getInstance();
+        TempBlocking tempBlocking = TempBlocking.getInstance();
 
         behavioursTriggerOrder.add( exploding );
         behavioursTriggerOrder.add( outOfBounds );
@@ -136,9 +136,10 @@ public class Rabbit extends Thing implements Comparable<Rabbit>
         {
             BehaviourTools b = BehaviourTools.getInstance( this, world );
             b.initialize( this, world );
+            behaviour.getVariables( behaviourVariables );
             State thisState = behaviour.newState(
                 new BehaviourTools( this, world ), behaviour.triggered );
-
+            behaviour.saveVariables( behaviourVariables );
             if ( thisState != null && !done )
             {
                 state = thisState;

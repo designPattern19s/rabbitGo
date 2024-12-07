@@ -14,10 +14,32 @@ public class TempBlocking extends Behaviour
 
     int blockingCnt = 0;
 
+    private static TempBlocking instance;
+
+    private TempBlocking(){}
+
+    public static TempBlocking getInstance() {
+        if (instance == null) {
+            instance = new TempBlocking();
+        }
+        return instance;
+    }
+
     @Override
     public void cancel()
     {
         blockingCnt = 0;
+    }
+
+    @Override
+    public void getVariables(RabbitBehaviourVariables vars) {
+        blockingCnt = vars.blockingCnt;
+    }
+
+    @Override
+    public void saveVariables(RabbitBehaviourVariables vars)
+    {
+        vars.blockingCnt = blockingCnt;
     }
 
     @Override

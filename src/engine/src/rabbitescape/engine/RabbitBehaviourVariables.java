@@ -23,6 +23,12 @@ public class RabbitBehaviourVariables
     public int bigSteps = 0;
     public Bridging.BridgeType bridgeType = Bridging.BridgeType.ALONG;
 
+    // tempBlocking
+    public int blockingCnt = 0;
+
+    // pause
+    public int pausingCnt = 0;
+
     //blocking
     public boolean abilityActive_blocking = false;
 
