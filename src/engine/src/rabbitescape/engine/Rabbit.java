@@ -50,60 +50,9 @@ public class Rabbit extends Thing implements Comparable<Rabbit>
 
     private void createBehaviours()
     {
-        Climbing climbing = Climbing.getInstance();
-        Digging digging = Digging.getInstance();
-        Exploding exploding = Exploding.getInstance();
-        Burning burning = Burning.getInstance();
-        OutOfBounds outOfBounds = OutOfBounds.getInstance();
-        Drowning drowning = Drowning.getInstance();
-        Exiting exiting = Exiting.getInstance();
-        Brollychuting brollychuting = Brollychuting.getInstance();
-        falling = Falling.getInstance();
-        Bashing bashing = Bashing.getInstance();
-        Bridging bridging = Bridging.getInstance();
-        Blocking blocking = Blocking.getInstance();
-        Walking walking = Walking.getInstance();
-        RabbotCrash rabbotCrash = RabbotCrash.getInstance();
-        RabbotWait rabbotWait = RabbotWait.getInstance();
-        Pause pause = Pause.getInstance();
-        TempBlocking tempBlocking = TempBlocking.getInstance();
-
-        behavioursTriggerOrder.add( exploding );
-        behavioursTriggerOrder.add( outOfBounds );
-        behavioursTriggerOrder.add( burning );
-        behavioursTriggerOrder.add( drowning );
-        behavioursTriggerOrder.add( rabbotCrash );
-        behavioursTriggerOrder.add( falling );
-        behavioursTriggerOrder.add( exiting );
-        behavioursTriggerOrder.add( brollychuting );
-        behavioursTriggerOrder.add( climbing );
-        behavioursTriggerOrder.add( bashing );
-        behavioursTriggerOrder.add( digging );
-        behavioursTriggerOrder.add( bridging );
-        behavioursTriggerOrder.add( blocking );
-        behavioursTriggerOrder.add( rabbotWait );
-        behavioursTriggerOrder.add( pause );
-        behavioursTriggerOrder.add( tempBlocking );
-        behavioursTriggerOrder.add( walking );
-
-        behaviours.add( exploding );
-        behaviours.add( outOfBounds );
-        behaviours.add( burning );
-        behaviours.add( drowning );
-        behaviours.add( rabbotCrash );
-        behaviours.add( falling );
-        behaviours.add( exiting );
-        behaviours.add( brollychuting );
-        behaviours.add( bashing );
-        behaviours.add( digging );
-        behaviours.add( bridging );
-        behaviours.add( blocking );
-        behaviours.add( climbing );
-        behaviours.add( rabbotWait );
-        behaviours.add( pause );
-        behaviours.add( tempBlocking );
-        behaviours.add( walking );
-
+        List<Behaviour> factoryBehaviours = BehaviourFactory.createRabbitBehaviours();
+        this.behaviours.addAll(factoryBehaviours);
+        this.behavioursTriggerOrder.addAll(factoryBehaviours);
         assert behavioursTriggerOrder.size() == behaviours.size();
     }
 
