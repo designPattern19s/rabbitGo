@@ -58,7 +58,12 @@ public class Rabbit extends Thing implements Comparable<Rabbit>
 
     public boolean isFallingToDeath()
     {
-        return falling.isFallingToDeath();
+        falling = Falling.getInstance();
+        falling.getVariables( behaviourVariables );
+        boolean fallingToDeath = falling.isFallingToDeath();
+        falling.saveVariables( behaviourVariables );
+
+        return fallingToDeath;
     }
 
     @Override
