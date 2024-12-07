@@ -3,6 +3,9 @@ package rabbitescape.engine;
 import static rabbitescape.engine.Block.Shape.*;
 import static rabbitescape.engine.Direction.RIGHT;
 import static rabbitescape.engine.Direction.opposite;
+
+import rabbitescape.engine.state.*;
+import rabbitescape.engine.state.RabbitStateTemplate;
 import rabbitescape.engine.util.Position;
 
 public class BehaviourTools
@@ -44,75 +47,20 @@ public class BehaviourTools
         return pickUpToken( type, false );
     }
 
-    public boolean rabbitIsFalling()
-    {
-        switch (rabbit.state)
-        {
-        case RABBIT_FALLING:
-        case RABBIT_FALLING_1:
-        case RABBIT_FALLING_1_TO_DEATH:
-        case RABBIT_DYING_OF_FALLING_2:
-        case RABBIT_DYING_OF_FALLING:
-        case RABBIT_FALLING_ONTO_LOWER_RIGHT:
-        case RABBIT_FALLING_ONTO_RISE_RIGHT:
-        case RABBIT_FALLING_ONTO_LOWER_LEFT:
-        case RABBIT_FALLING_ONTO_RISE_LEFT:
-        case RABBIT_FALLING_1_ONTO_LOWER_RIGHT:
-        case RABBIT_FALLING_1_ONTO_RISE_RIGHT:
-        case RABBIT_FALLING_1_ONTO_LOWER_LEFT:
-        case RABBIT_FALLING_1_ONTO_RISE_LEFT:
-        case RABBIT_DYING_OF_FALLING_SLOPE_RISE_RIGHT:
-        case RABBIT_DYING_OF_FALLING_SLOPE_RISE_RIGHT_2:
-        case RABBIT_DYING_OF_FALLING_2_SLOPE_RISE_RIGHT:
-        case RABBIT_DYING_OF_FALLING_2_SLOPE_RISE_RIGHT_2:
-        case RABBIT_DYING_OF_FALLING_SLOPE_RISE_LEFT:
-        case RABBIT_DYING_OF_FALLING_SLOPE_RISE_LEFT_2:
-        case RABBIT_DYING_OF_FALLING_2_SLOPE_RISE_LEFT:
-        case RABBIT_DYING_OF_FALLING_2_SLOPE_RISE_LEFT_2:
-            return true;
-        default:
-            return false;
-        }
+    public boolean rabbitTemplate(RabbitStateTemplate stateTemplate) {
+        return stateTemplate.checkState(rabbit);
     }
 
-    public boolean rabbitIsClimbing()
-    {
-        switch( rabbit.state)
-        {
-        case RABBIT_ENTERING_EXIT_CLIMBING_RIGHT:
-        case RABBIT_ENTERING_EXIT_CLIMBING_LEFT:
-        case RABBIT_CLIMBING_LEFT_START:
-        case RABBIT_CLIMBING_LEFT_CONTINUE_1:
-        case RABBIT_CLIMBING_LEFT_CONTINUE_2:
-        case RABBIT_CLIMBING_LEFT_END:
-        case RABBIT_CLIMBING_LEFT_BANG_HEAD:
-        case RABBIT_CLIMBING_RIGHT_START:
-        case RABBIT_CLIMBING_RIGHT_CONTINUE_1:
-        case RABBIT_CLIMBING_RIGHT_CONTINUE_2:
-        case RABBIT_CLIMBING_RIGHT_END:
-        case RABBIT_CLIMBING_RIGHT_BANG_HEAD:
-            return true;
-        default:
-            return false;
-        }
+    public boolean rabbitIsFalling() {
+        return rabbitTemplate(new FallingState());
     }
 
-    public boolean rabbitIsBashing()
-    {
-        switch( rabbit.state)
-        {
-        case RABBIT_BASHING_RIGHT:
-        case RABBIT_BASHING_LEFT:
-        case RABBIT_BASHING_UP_RIGHT:
-        case RABBIT_BASHING_UP_LEFT:
-        case RABBIT_BASHING_USELESSLY_RIGHT:
-        case RABBIT_BASHING_USELESSLY_LEFT:
-        case RABBIT_BASHING_USELESSLY_RIGHT_UP:
-        case RABBIT_BASHING_USELESSLY_LEFT_UP:
-            return true;
-        default:
-            return false;
-        }
+    public boolean rabbitIsClimbing() {
+        return rabbitTemplate(new ClimbingState());
+    }
+
+    public boolean rabbitIsBashing() {
+        return rabbitTemplate(new BashingState());
     }
 
     /**
