@@ -31,9 +31,7 @@ public class Token extends Thing
         climb,
         explode,
         brolly,
-        slower,
         pause,
-        testdig,
         tempBlock
     }
 
@@ -113,7 +111,6 @@ public class Token extends Thing
                 TOKEN_PAUSE_ON_SLOPE
             );
 
-            case testdig:
             case block: return chooseState( 
                 moving, 
                 slopeBelow, 
@@ -153,8 +150,6 @@ public class Token extends Thing
                 TOKEN_BROLLY_FALL_TO_SLOPE, 
                 TOKEN_BROLLY_ON_SLOPE
                 );
-            case slower:
-                return null;
 
             default: throw new UnknownType( type );
         }
