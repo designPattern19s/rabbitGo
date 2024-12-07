@@ -19,8 +19,8 @@ public class Rabbit extends Thing implements Comparable<Rabbit>
     }
 
     public final static int NOT_INDEXED = 0;
-    private final List<Behaviour> behaviours;
-    private final List<Behaviour> behavioursTriggerOrder;
+    private List<Behaviour> behaviours;
+    private List<Behaviour> behavioursTriggerOrder;
 
     public int index;
 
@@ -61,25 +61,6 @@ public class Rabbit extends Thing implements Comparable<Rabbit>
     //blocking
     public boolean abilityActive_blocking = false;
 
-
-    private static final Climbing climbing = new Climbing();
-    private static final     Digging digging = new Digging();
-    private static final     Exploding exploding = new Exploding();
-    private static final     Burning burning = new Burning();
-    private static final     OutOfBounds outOfBounds = new OutOfBounds();
-    private static final     Drowning drowning = new Drowning();
-    private static final     Exiting exiting = new Exiting();
-    private static final     Brollychuting brollychuting = new Brollychuting();
-    private static final     Falling falling = new Falling();
-    private static final     Bashing bashing = new Bashing();
-    private static final     Bridging bridging = new Bridging();
-    private static final     Blocking blocking = new Blocking();
-    private static final     Walking walking = new Walking();
-    private static final     RabbotCrash rabbotCrash = new RabbotCrash();
-    private static final     RabbotWait rabbotWait = new RabbotWait();
-
-
-
     public Rabbit( int x, int y, Direction dir, Type type )
     {
         super( x, y, RABBIT_WALKING_LEFT );
@@ -95,43 +76,15 @@ public class Rabbit extends Thing implements Comparable<Rabbit>
 
     private void createBehaviours()
     {
-        behavioursTriggerOrder.add( exploding );
-        behavioursTriggerOrder.add( outOfBounds );
-        behavioursTriggerOrder.add( burning );
-        behavioursTriggerOrder.add( drowning );
-        behavioursTriggerOrder.add( rabbotCrash );
-        behavioursTriggerOrder.add( falling );
-        behavioursTriggerOrder.add( exiting );
-        behavioursTriggerOrder.add( brollychuting );
-        behavioursTriggerOrder.add( climbing );
-        behavioursTriggerOrder.add( bashing );
-        behavioursTriggerOrder.add( digging );
-        behavioursTriggerOrder.add( bridging );
-        behavioursTriggerOrder.add( blocking );
-        behavioursTriggerOrder.add( rabbotWait );
-        behavioursTriggerOrder.add( walking );
-
-        behaviours.add( exploding );
-        behaviours.add( outOfBounds );
-        behaviours.add( burning );
-        behaviours.add( drowning );
-        behaviours.add( rabbotCrash );
-        behaviours.add( falling );
-        behaviours.add( exiting );
-        behaviours.add( brollychuting );
-        behaviours.add( bashing );
-        behaviours.add( digging );
-        behaviours.add( bridging );
-        behaviours.add( blocking );
-        behaviours.add( climbing );
-        behaviours.add( rabbotWait );
-        behaviours.add( walking );
+        behavioursTriggerOrder = BehaviourFactory.createBehaviours();
+        behaviours = BehaviourFactory.createBehaviours();
 
         assert behavioursTriggerOrder.size() == behaviours.size();
     }
 
     public boolean isFallingToDeath(Rabbit rabbit)
     {
+        Falling falling = BehaviourFactory.getFallingBehavior();
         return falling.isFallingToDeath(rabbit);
     }
 
