@@ -44,7 +44,8 @@ public class Climbing extends Behaviour
     @Override
     public boolean checkTriggered( Rabbit rabbit, World world )
     {
-        BehaviourTools t = new BehaviourTools( rabbit, world );
+        BehaviourTools t = BehaviourTools.getInstance( rabbit, world );
+        t.initialize( rabbit, world );
 
         return !hasAbility && t.pickUpToken( climb, true );
     }

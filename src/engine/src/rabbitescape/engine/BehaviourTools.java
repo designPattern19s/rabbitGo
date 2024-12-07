@@ -7,11 +7,26 @@ import rabbitescape.engine.util.Position;
 
 public class BehaviourTools
 {
-    public final Rabbit rabbit;
-    public final World world;
+    private static BehaviourTools instance;
+    public Rabbit rabbit;
+    public World world;
+
+    private BehaviourTools(){}
 
     public BehaviourTools( Rabbit rabbit, World world )
     {
+        this.rabbit = rabbit;
+        this.world = world;
+    }
+
+    public static BehaviourTools getInstance(Rabbit rabbit, World world){
+        if(instance == null) {
+            instance = new BehaviourTools(rabbit, world);
+        }
+        return instance;
+    }
+
+    public void initialize(Rabbit rabbit, World world){
         this.rabbit = rabbit;
         this.world = world;
     }
