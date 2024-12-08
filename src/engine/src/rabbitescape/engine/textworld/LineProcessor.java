@@ -619,6 +619,18 @@ public class LineProcessor
                 things.add( ret );
                 break;
             }
+            case 'o':
+            {
+                ret = new Token( x, y, Token.Type.tempBlock );
+                things.add( ret );
+                break;
+            }
+            case 'u':
+            {
+                ret = new Token( x, y, Token.Type.pause );
+                things.add( ret );
+                break;
+            }
             case 'c':
             {
                 ret = new Token( x, y, Token.Type.climb );

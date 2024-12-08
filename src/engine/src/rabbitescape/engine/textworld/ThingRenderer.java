@@ -82,6 +82,8 @@ public class ThingRenderer
             case climb:   return 'c';
             case explode: return 'p';
             case brolly:  return 'l';
+            case tempBlock: return 'o';
+            case pause:  return 'u';
             default: throw new UnknownTokenType( thing.type );
         }
     }
