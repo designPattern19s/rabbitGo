@@ -26,14 +26,14 @@ public class Brollychuting extends Behaviour
 
     public void getVariables( RabbitBehaviourVariables vars) {
         hasAbility = vars.hasAbility_brolly;
-        climbingAbilityActivate = vars.hasAbility_climbing;
+        climbingAbilityActivate = vars.abilityActive_climbing;
         diggingStepsOfDigging = vars.stepsOfDigging;
     }
 
     public void saveVariables(RabbitBehaviourVariables vars)
     {
         vars.hasAbility_brolly = hasAbility;
-        vars.hasAbility_climbing = climbingAbilityActivate;
+        vars.abilityActive_climbing = climbingAbilityActivate;
         vars.stepsOfDigging = diggingStepsOfDigging;
     }
 

@@ -125,7 +125,6 @@ public class Falling extends Behaviour
             || rabbit.state == RABBIT_DIGGING
             || BrollyChutingHasBrolly )
         {
-            System.out.println("check triggerd");
             return false;
         }
 
