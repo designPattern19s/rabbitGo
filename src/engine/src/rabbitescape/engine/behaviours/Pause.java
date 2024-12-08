@@ -15,11 +15,6 @@ public class Pause extends Behaviour
     int pausingCnt = 0;
 
 
-
-    private Pause(){}
-
-
-
     @Override
     public void cancel()
     {
@@ -30,7 +25,8 @@ public class Pause extends Behaviour
     @Override
     public boolean checkTriggered( Rabbit rabbit, World world )
     {
-        BehaviourTools t = new BehaviourTools( rabbit, world );
+        BehaviourTools t = BehaviourTools.getInstance( rabbit, world );
+        t.initialize( rabbit, world );
         boolean isTriggered = t.pickUpToken( pause );
         if (isTriggered) {
             pausingCnt = PAUSING_TIME;  // 트리거가 발생하면 정해진 시간 만큼 cnt 설정

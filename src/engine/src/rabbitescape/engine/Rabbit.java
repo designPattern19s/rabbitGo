@@ -19,12 +19,11 @@ public class Rabbit extends Thing implements Comparable<Rabbit>
     }
 
     public final static int NOT_INDEXED = 0;
-    private final List<Behaviour> behaviours;
-    private final List<Behaviour> behavioursTriggerOrder;
+    private final BehaviourFactory behaviourFactory = new BehaviourFactory( getFatalHeight() );
+    private List<Behaviour> behaviours;
+    private List<Behaviour> behavioursTriggerOrder;
 
     public int index;
-
-    private Falling falling;
 
     public Direction dir;
     public boolean onSlope;
@@ -33,33 +32,32 @@ public class Rabbit extends Thing implements Comparable<Rabbit>
     public boolean slopeBashHop = false;
     public final Type type;
 
-    public Rabbit( int x, int y, Direction dir, Type type )
+    public Rabbit( int x, int y, Direction dir, Type type)
     {
         super( x, y, RABBIT_WALKING_LEFT );
         this.dir = dir;
         this.onSlope = false;
         this.type = type;
-        behaviours = new ArrayList<>();
-        behavioursTriggerOrder = new ArrayList<>();
+//        behaviours = new ArrayList<>();
+//        behavioursTriggerOrder = new ArrayList<>();
         createBehaviours();
         index = NOT_INDEXED;
     }
 
     private void createBehaviours()
     {
-        List<Behaviour> factoryBehaviours = BehaviourFactory.createRabbitBehaviours();
-        this.behaviours.addAll(factoryBehaviours);
-        this.behavioursTriggerOrder.addAll(factoryBehaviours);
-        assert behavioursTriggerOrder.size() == behaviours.size();
+
+        behaviours = behaviourFactory.createBehaviours();
+        behavioursTriggerOrder = behaviours;
+
+        //assert behavioursTriggerOrder.size() == behaviours.size();
     }
 
     public boolean isFallingToDeath()
     {
-        falling = Falling.getInstance();
-        boolean fallingToDeath = falling.isFallingToDeath();
-
-        return fallingToDeath;
+        return behaviourFactory.getFalling().isFallingToDeath();
     }
+
 
     @Override
     public void calcNewState( World world )

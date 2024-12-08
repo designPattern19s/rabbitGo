@@ -71,10 +71,7 @@ public class LevelsMenu extends Menu
 
         for ( IdxObj<MenuItem> item : enumerate1( items ) )
         {
-<<<<<<< Updated upstream
 //            item.object.enabled = ( item.index <= lastEnabled );
-=======
->>>>>>> Stashed changes
             item.object.enabled = true;
         }
     }

@@ -104,14 +104,15 @@ public class Falling extends Behaviour
     @Override
     public boolean checkTriggered( Rabbit rabbit, World world )
     {
-        if ( climbing.hasAbility
+        if ( climbing.abilityActive
             || rabbit.state == RABBIT_DIGGING
-            || brollychuting.hasAbility )
+            || brollychuting.hasBrolly() )
         {
             return false;
         }
 
-        BehaviourTools t = new BehaviourTools( rabbit, world );
+        BehaviourTools t = BehaviourTools.getInstance( rabbit, world );
+        t.initialize( rabbit, world );
 
         //noinspection RedundantIfStatement
         if ( t.isFlat( t.blockBelow() ) )
