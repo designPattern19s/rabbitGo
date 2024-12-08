@@ -11,26 +11,6 @@ import rabbitescape.engine.ChangeDescription.State;
 public class Digging extends Behaviour
 {
     int stepsOfDigging;
-    private static Digging instance;
-
-    private Digging(){}
-
-    public static Digging getInstance() {
-        if (instance == null) {
-            instance = new Digging();
-        }
-        return instance;
-    }
-
-    public void getVariables(RabbitBehaviourVariables vars) {
-        stepsOfDigging = vars.stepsOfDigging;
-    }
-
-    public void saveVariables(RabbitBehaviourVariables vars)
-    {
-        vars.stepsOfDigging = stepsOfDigging;
-    }
-
 
     @Override
     public void cancel()
@@ -41,8 +21,7 @@ public class Digging extends Behaviour
     @Override
     public boolean checkTriggered( Rabbit rabbit, World world )
     {
-        BehaviourTools t = BehaviourTools.getInstance( rabbit, world );
-        t.initialize( rabbit, world );
+        BehaviourTools t = new BehaviourTools( rabbit, world );
         return t.pickUpToken( dig );
     }
 

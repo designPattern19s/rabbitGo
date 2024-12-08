@@ -12,25 +12,6 @@ import rabbitescape.engine.ChangeDescription.State;
 public class Bashing extends Behaviour
 {
     private int stepsOfBashing;
-    private static Bashing instance;
-
-    private Bashing(){ }
-
-    public static Bashing getInstance() {
-        if (instance == null) {
-            instance = new Bashing();
-        }
-        return instance;
-    }
-
-    public void getVariables(RabbitBehaviourVariables vars) {
-        stepsOfBashing = vars.stepsOfBashing;
-    }
-
-    public void saveVariables(RabbitBehaviourVariables vars)
-    {
-        vars.stepsOfBashing = stepsOfBashing;
-    }
 
 
     @Override
@@ -42,8 +23,7 @@ public class Bashing extends Behaviour
     @Override
     public boolean checkTriggered( Rabbit rabbit, World world )
     {
-        BehaviourTools t = BehaviourTools.getInstance( rabbit, world );
-        t.initialize( rabbit, world );
+        BehaviourTools t = new BehaviourTools( rabbit, world );
 
         return t.pickUpToken( bash );
     }

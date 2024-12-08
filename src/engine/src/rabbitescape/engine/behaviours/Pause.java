@@ -14,16 +14,11 @@ public class Pause extends Behaviour
 
     int pausingCnt = 0;
 
-    private static Pause instance;
+
 
     private Pause(){}
 
-    public static Pause getInstance() {
-        if (instance == null) {
-            instance = new Pause();
-        }
-        return instance;
-    }
+
 
     @Override
     public void cancel()
@@ -31,16 +26,6 @@ public class Pause extends Behaviour
         pausingCnt = 0;
     }
 
-    @Override
-    public void getVariables(RabbitBehaviourVariables vars) {
-        pausingCnt = vars.pausingCnt;
-    }
-
-    @Override
-    public void saveVariables(RabbitBehaviourVariables vars)
-    {
-        vars.pausingCnt = pausingCnt;
-    }
 
     @Override
     public boolean checkTriggered( Rabbit rabbit, World world )

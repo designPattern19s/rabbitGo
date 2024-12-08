@@ -10,31 +10,13 @@ import rabbitescape.engine.ChangeDescription.State;
 
 public class Brollychuting extends Behaviour
 {
-    private static Brollychuting instance;
     boolean hasAbility = false;
-    boolean climbingAbilityActivate = false;
-    int diggingStepsOfDigging = 0;
+    public Climbing climbing;
+    public Digging digging;
 
-    private Brollychuting(){ }
-
-    public static Brollychuting getInstance() {
-        if (instance == null) {
-            instance = new Brollychuting();
-        }
-        return instance;
-    }
-
-    public void getVariables( RabbitBehaviourVariables vars) {
-        hasAbility = vars.hasAbility_brolly;
-        climbingAbilityActivate = vars.hasAbility_climbing;
-        diggingStepsOfDigging = vars.stepsOfDigging;
-    }
-
-    public void saveVariables(RabbitBehaviourVariables vars)
-    {
-        vars.hasAbility_brolly = hasAbility;
-        vars.hasAbility_climbing = climbingAbilityActivate;
-        vars.stepsOfDigging = diggingStepsOfDigging;
+    public Brollychuting(Climbing climbing, Digging digging) {
+        this.climbing = climbing;
+        this.digging = digging;
     }
 
     @Override
@@ -50,7 +32,7 @@ public class Brollychuting extends Behaviour
             return null;
         }
 
-        if ( climbingAbilityActivate )
+        if ( climbing.abilityActive )
         {
             return null;
         }
@@ -110,8 +92,7 @@ public class Brollychuting extends Behaviour
     @Override
     public boolean checkTriggered( Rabbit rabbit, World world )
     {
-        BehaviourTools t = BehaviourTools.getInstance( rabbit, world );
-        t.initialize( rabbit, world );
+        BehaviourTools t = new BehaviourTools( rabbit, world );
 
         if ( !hasAbility && t.pickUpToken( brolly, true ) )
         {
@@ -123,7 +104,7 @@ public class Brollychuting extends Behaviour
             return false;
         }
 
-        if ( climbingAbilityActivate || diggingStepsOfDigging > 2 )
+        if ( climbing.abilityActive || digging.stepsOfDigging > 2 )
         {
             return false;
         }

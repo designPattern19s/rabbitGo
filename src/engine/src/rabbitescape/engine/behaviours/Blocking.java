@@ -11,26 +11,6 @@ import rabbitescape.engine.ChangeDescription.State;
 public class Blocking extends Behaviour
 {
     public boolean abilityActive = false;
-    private static Blocking instance;
-
-    private Blocking(){ }
-
-    public static Blocking getInstance() {
-        if (instance == null) {
-            instance = new Blocking();
-        }
-        return instance;
-    }
-
-    public void getVariables(RabbitBehaviourVariables vars) {
-        abilityActive = vars.abilityActive_blocking;
-    }
-
-    public void saveVariables(RabbitBehaviourVariables vars)
-    {
-        vars.abilityActive_blocking = abilityActive;
-    }
-
 
     @Override
     public void cancel()
@@ -41,8 +21,7 @@ public class Blocking extends Behaviour
     @Override
     public boolean checkTriggered( Rabbit rabbit, World world )
     {
-        BehaviourTools t = BehaviourTools.getInstance( rabbit, world );
-        t.initialize( rabbit, world );
+        BehaviourTools t = new BehaviourTools( rabbit, world );
         return t.pickUpToken( block );
     }
 

@@ -8,26 +8,6 @@ import rabbitescape.engine.config.TapTimer;
 
 public class OutOfBounds extends Behaviour
 {
-    private static OutOfBounds instance;
-
-    private OutOfBounds(){}
-
-    public static OutOfBounds getInstance() {
-        if (instance == null) {
-            instance = new OutOfBounds();
-        }
-        return instance;
-    }
-
-    public void getVariables( RabbitBehaviourVariables vars) {
-
-    }
-
-    public void saveVariables(RabbitBehaviourVariables vars)
-    {
-
-    }
-
 
     @Override
     public void cancel()

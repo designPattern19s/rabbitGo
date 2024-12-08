@@ -34,10 +34,6 @@ public abstract class Behaviour
 
     public abstract void cancel();
 
-    public abstract void getVariables( RabbitBehaviourVariables vars);
-
-    public abstract void saveVariables( RabbitBehaviourVariables vars );
-
     public void saveState( Map<String, String> saveState )
     {
     }

@@ -8,27 +8,6 @@ import rabbitescape.engine.ChangeDescription.State;
 
 public class Exploding extends Behaviour
 {
-    private static Exploding instance;
-
-    private Exploding(){}
-
-    public static Exploding getInstance() {
-        if (instance == null) {
-            instance = new Exploding();
-        }
-        return instance;
-    }
-
-    public void getVariables(RabbitBehaviourVariables vars) {
-
-    }
-
-    public void saveVariables(RabbitBehaviourVariables vars)
-    {
-
-    }
-
-
     @Override
     public void cancel()
     {
@@ -37,8 +16,7 @@ public class Exploding extends Behaviour
     @Override
     public boolean checkTriggered( Rabbit rabbit, World world )
     {
-        BehaviourTools t = BehaviourTools.getInstance( rabbit, world );
-        t.initialize( rabbit, world );
+        BehaviourTools t = new BehaviourTools( rabbit, world );
         return t.pickUpToken( explode, true );
     }
 

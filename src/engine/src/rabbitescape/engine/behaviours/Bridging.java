@@ -19,32 +19,10 @@ public class Bridging extends Behaviour
         DOWN_UP
     }
 
-    private static Bridging instance;
     private int smallSteps = 0;
     private int bigSteps = 0;
     private BridgeType bridgeType = BridgeType.ALONG;
 
-    private Bridging(){ }
-
-    public static Bridging getInstance() {
-        if (instance == null) {
-            instance = new Bridging();
-        }
-        return instance;
-    }
-
-    public void getVariables(RabbitBehaviourVariables vars) {
-        smallSteps = vars.smallSteps;
-        bigSteps = vars.bigSteps;
-        bridgeType = vars.bridgeType;
-    }
-
-    public void saveVariables(RabbitBehaviourVariables vars)
-    {
-        vars.smallSteps = smallSteps;
-        vars.bigSteps = bigSteps;
-        vars.bridgeType = bridgeType;
-    }
 
     @Override
     public void cancel()
@@ -61,8 +39,7 @@ public class Bridging extends Behaviour
         if ( bigSteps <= 0 )
             // Only pick up a token if we've finished, and we can bridge
         {
-            BehaviourTools t = BehaviourTools.getInstance( rabbit, world );
-            t.initialize( rabbit, world );
+            BehaviourTools t = new BehaviourTools( rabbit, world );
 
             State possibleState = bridgingState( t, 3, 3, bridgeType );
 

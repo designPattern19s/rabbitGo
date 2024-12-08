@@ -7,27 +7,6 @@ import rabbitescape.engine.ChangeDescription.State;
 
 public class Burning extends Behaviour
 {
-    private static Burning instance;
-
-    public static Burning getInstance() {
-        if (instance == null) {
-            instance = new Burning();
-        }
-        return instance;
-    }
-
-    private Burning(){}
-
-    public void getVariables( RabbitBehaviourVariables vars) {
-
-    }
-
-    public void saveVariables(RabbitBehaviourVariables vars)
-    {
-
-    }
-
-
     @Override
     public void cancel()
     {

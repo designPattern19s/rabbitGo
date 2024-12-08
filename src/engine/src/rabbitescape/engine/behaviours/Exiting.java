@@ -7,26 +7,6 @@ import rabbitescape.engine.ChangeDescription.State;
 
 public class Exiting extends Behaviour
 {
-    private static Exiting instance;
-
-    private Exiting(){}
-
-    public static Exiting getInstance() {
-        if (instance == null) {
-            instance = new Exiting();
-        }
-        return instance;
-    }
-
-    public void getVariables(RabbitBehaviourVariables vars) {
-
-    }
-
-    public void saveVariables(RabbitBehaviourVariables vars)
-    {
-
-    }
-
     @Override
     public void cancel()
     {

@@ -5,26 +5,6 @@ import rabbitescape.engine.ChangeDescription.State;
 
 public class RabbotCrash extends Behaviour
 {
-    private static RabbotCrash instance;
-
-    private RabbotCrash(){}
-
-    public static RabbotCrash getInstance() {
-        if (instance == null) {
-            instance = new RabbotCrash();
-        }
-        return instance;
-    }
-
-    public void getVariables( RabbitBehaviourVariables vars) {
-
-    }
-
-    public void saveVariables(RabbitBehaviourVariables vars)
-    {
-
-    }
-
 
     @Override
     public void cancel()

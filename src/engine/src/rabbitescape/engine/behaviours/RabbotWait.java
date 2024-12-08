@@ -5,26 +5,6 @@ import rabbitescape.engine.ChangeDescription.State;
 
 public class RabbotWait extends Behaviour
 {
-    private static RabbotWait instance;
-
-    private RabbotWait(){}
-
-    public static RabbotWait getInstance() {
-        if (instance == null) {
-            instance = new RabbotWait();
-        }
-        return instance;
-    }
-
-    public void getVariables( RabbitBehaviourVariables vars) {
-
-    }
-
-    public void saveVariables(RabbitBehaviourVariables vars)
-    {
-
-    }
-
 
     private boolean within1Vertically( Rabbit otherRabbit, Rabbit rabbit )
     {

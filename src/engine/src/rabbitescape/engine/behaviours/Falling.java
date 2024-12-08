@@ -12,32 +12,15 @@ public class Falling extends Behaviour
 {
     private int heightFallen = 0;
 
-    private boolean ClimbingHasAbility=false;
-    private boolean BrollyChutingHasAbility=false;
+    public Climbing climbing;
+    public Brollychuting brollychuting;
     private int fatalHeight;
-    private static Falling instance;
 
-    private Falling(){}
-
-    public static Falling getInstance() {
-        if (instance == null) {
-            instance = new Falling();
-        }
-        return instance;
-    }
-
-    public void getVariables(RabbitBehaviourVariables vars) {
-        ClimbingHasAbility = vars.hasAbility_climbing;
-        BrollyChutingHasAbility = vars.hasAbility_brolly;
-        fatalHeight = vars.fatalHeight;
-    }
-
-    public void saveVariables(RabbitBehaviourVariables vars)
-    {
-        vars.hasAbility_climbing = ClimbingHasAbility;
-        vars.hasAbility_brolly = BrollyChutingHasAbility;
-        vars.fatalHeight = fatalHeight;
-    }
+   public Falling(Climbing climbing, Brollychuting brollychuting, int fatalHeight) {
+       this.climbing = climbing;
+       this.brollychuting = brollychuting;
+       this.fatalHeight = fatalHeight;
+   }
 
     public boolean isFallingToDeath()
     {
@@ -121,15 +104,14 @@ public class Falling extends Behaviour
     @Override
     public boolean checkTriggered( Rabbit rabbit, World world )
     {
-        if (   ClimbingHasAbility
+        if ( climbing.hasAbility
             || rabbit.state == RABBIT_DIGGING
-            || BrollyChutingHasAbility )
+            || brollychuting.hasAbility )
         {
             return false;
         }
 
-        BehaviourTools t = BehaviourTools.getInstance( rabbit, world );
-        t.initialize( rabbit, world );
+        BehaviourTools t = new BehaviourTools( rabbit, world );
 
         //noinspection RedundantIfStatement
         if ( t.isFlat( t.blockBelow() ) )

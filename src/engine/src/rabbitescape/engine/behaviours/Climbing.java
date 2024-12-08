@@ -11,29 +11,8 @@ import rabbitescape.engine.ChangeDescription.State;
 
 public class Climbing extends Behaviour
 {
-    private static Climbing instance;
     boolean hasAbility = false;
     public boolean abilityActive = false;
-
-    private Climbing(){}
-
-    public static Climbing getInstance() {
-        if (instance == null) {
-            instance = new Climbing();
-        }
-        return instance;
-    }
-
-    public void getVariables(RabbitBehaviourVariables vars) {
-        hasAbility = vars.hasAbility_climbing;
-        abilityActive = vars.hasAbility_climbing;
-    }
-
-    public void saveVariables(RabbitBehaviourVariables vars)
-    {
-        vars.hasAbility_climbing = hasAbility;
-        vars.abilityActive_climbing = abilityActive;
-    }
 
     @Override
     public void cancel()
@@ -44,8 +23,7 @@ public class Climbing extends Behaviour
     @Override
     public boolean checkTriggered( Rabbit rabbit, World world )
     {
-        BehaviourTools t = BehaviourTools.getInstance( rabbit, world );
-        t.initialize( rabbit, world );
+        BehaviourTools t = new BehaviourTools( rabbit, world );
 
         return !hasAbility && t.pickUpToken( climb, true );
     }

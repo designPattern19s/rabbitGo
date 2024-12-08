@@ -8,25 +8,6 @@ import rabbitescape.engine.ChangeDescription.State;
 
 public class Drowning extends Behaviour
 {
-    private static Drowning instance;
-
-    private Drowning(){}
-
-    public static Drowning getInstance() {
-        if (instance == null) {
-            instance = new Drowning();
-        }
-        return instance;
-    }
-
-    public void getVariables( RabbitBehaviourVariables vars) {
-
-    }
-
-    public void saveVariables(RabbitBehaviourVariables vars)
-    {
-
-    }
 
     @Override
     public void cancel()

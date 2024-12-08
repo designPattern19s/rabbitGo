@@ -9,26 +9,6 @@ import rabbitescape.engine.ChangeDescription.State;
 
 public class Walking extends Behaviour
 {
-    private static Walking instance;
-
-    private Walking(){}
-
-    public void getVariables(RabbitBehaviourVariables vars) {
-
-    }
-
-    public void saveVariables(RabbitBehaviourVariables vars)
-    {
-
-    }
-
-    public static Walking getInstance() {
-        if (instance == null) {
-            instance = new Walking();
-        }
-        return instance;
-    }
-
 
     @Override
     public void cancel()
@@ -315,17 +295,6 @@ public class Walking extends Behaviour
             {
                 rabbit.dir = LEFT;
                 checkJumpOntoSlope( world, rabbit );
-                return true;
-            }
-            case RABBIT_PAUSING:
-            {
-                rabbit.onSlope = false;
-                return true;
-            }
-            case RABBIT_PAUSING_RISE_LEFT:
-            case RABBIT_PAUSING_RISE_RIGHT:
-            {
-                rabbit.onSlope = true;
                 return true;
             }
             default:
