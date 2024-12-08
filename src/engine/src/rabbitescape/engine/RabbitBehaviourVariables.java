@@ -17,7 +17,7 @@ public class RabbitBehaviourVariables
     public int fatalHeight;
 
     //bashing
-    public int stepsOfBashing;
+    public int stepsOfBashing = 0;
 
     public int smallSteps = 0;
     public int bigSteps = 0;

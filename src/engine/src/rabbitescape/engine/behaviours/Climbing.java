@@ -26,7 +26,7 @@ public class Climbing extends Behaviour
 
     public void getVariables(RabbitBehaviourVariables vars) {
         hasAbility = vars.hasAbility_climbing;
-        abilityActive = vars.hasAbility_climbing;
+        abilityActive = vars.abilityActive_climbing;
     }
 
     public void saveVariables(RabbitBehaviourVariables vars)
