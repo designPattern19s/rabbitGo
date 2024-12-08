@@ -130,7 +130,7 @@ public class WorldAssertions
             world.step();
 
             assertThat(
-                renderWorld( world, true, false ),
+                renderWorld( world, false, false ),
                 equalToState( split( state.object, "\n" ), state.index + 2 )
             );
         }
