@@ -8,19 +8,19 @@ import rabbitescape.engine.*;
 
 import java.util.Map;
 
-public class Pause extends Behaviour
+public class Pausing extends Behaviour
 {
     static final int PAUSING_TIME = 5;  // 총 멈추는 시간
 
     int pausingCnt = 0;
 
-    private static Pause instance;
+    private static Pausing instance;
 
-    private Pause(){}
+    private Pausing(){}
 
-    public static Pause getInstance() {
+    public static Pausing getInstance() {
         if (instance == null) {
-            instance = new Pause();
+            instance = new Pausing();
         }
         return instance;
     }

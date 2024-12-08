@@ -26,7 +26,7 @@ public class BehaviourFactory {
         behaviours.add(RabbotWait.getInstance());
 
         // add new Token
-        behaviours.add(Pause.getInstance());
+        behaviours.add(Pausing.getInstance());
         behaviours.add(TempBlocking.getInstance());
 
         // last
