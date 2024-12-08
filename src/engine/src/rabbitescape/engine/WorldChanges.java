@@ -189,8 +189,17 @@ public class WorldChanges
             return;
         }
 
-        tokensToAdd.add( new Token( x, y, type, world ) );
-        world.abilities.put( type, numLeft - 1 );
+        if(type == Token.Type.erase) {
+            Token eraseToken = world.getTokenAt( x, y );
+            if ( eraseToken != null) {
+                tokensToRemove.add(eraseToken);
+                world.abilities.put(type, numLeft -1);
+            }
+        } else {
+            tokensToAdd.add( new Token( x, y, type, world ) );
+            world.abilities.put( type, numLeft - 1 );
+        }
+
     }
 
     public synchronized void removeToken( Token thing )

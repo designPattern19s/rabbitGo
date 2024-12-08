@@ -32,7 +32,8 @@ public class Token extends Thing
         explode,
         brolly,
         pause,
-        tempBlock
+        tempBlock,
+        erase
     }
 
     public final Type type;

@@ -11,6 +11,7 @@
 :rabbit_delay=4
 :music=tryad-witness
 :dig=5
+:erase=2
 ###########
 #   Q     #
 #\      /##
