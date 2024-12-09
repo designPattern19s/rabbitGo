@@ -92,7 +92,7 @@ public class Rabbit extends Thing implements Comparable<Rabbit>
             b.initialize( this, world );
             behaviour.getVariables( behaviourVariables );
             State thisState = behaviour.newState(
-                new BehaviourTools( this, world ), behaviour.triggered );
+                b, behaviour.triggered );
             behaviour.saveVariables( behaviourVariables );
             if ( thisState != null && !done )
             {
