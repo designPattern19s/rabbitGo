@@ -19,8 +19,8 @@ public class Rabbit extends Thing implements Comparable<Rabbit>
     }
 
     public final static int NOT_INDEXED = 0;
-    private final List<Behaviour> behaviours;
-    private final List<Behaviour> behavioursTriggerOrder;
+    protected final List<Behaviour> behaviours;
+    protected final List<Behaviour> behavioursTriggerOrder;
 
     public int index;
 
