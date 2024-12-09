@@ -5,7 +5,7 @@ import rabbitescape.engine.behaviours.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BehaviourFactory {
+public class BehaviourList {
 
     public static List<Behaviour> createRabbitBehaviours() {
         List<Behaviour> behaviours = new ArrayList<>();

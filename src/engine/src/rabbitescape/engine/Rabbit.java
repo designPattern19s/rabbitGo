@@ -50,9 +50,9 @@ public class Rabbit extends Thing implements Comparable<Rabbit>
 
     private void createBehaviours()
     {
-        List<Behaviour> factoryBehaviours = BehaviourFactory.createRabbitBehaviours();
-        this.behaviours.addAll(factoryBehaviours);
-        this.behavioursTriggerOrder.addAll(factoryBehaviours);
+        List<Behaviour> behaviourList = BehaviourList.createRabbitBehaviours();
+        this.behaviours.addAll(behaviourList);
+        this.behavioursTriggerOrder.addAll(behaviourList);
         assert behavioursTriggerOrder.size() == behaviours.size();
     }
 
