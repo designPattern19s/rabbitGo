@@ -25,11 +25,11 @@ public class BehaviourList {
         behaviours.add(Blocking.getInstance());
         behaviours.add(RabbotWait.getInstance());
 
-        // add new Token
+        // add new behaviours
         behaviours.add(Pausing.getInstance());
         behaviours.add(TempBlocking.getInstance());
 
-        // last
+        // Be careful, when you want to add behaviours, you must add Walking before
         behaviours.add(Walking.getInstance());
 
         return behaviours;
