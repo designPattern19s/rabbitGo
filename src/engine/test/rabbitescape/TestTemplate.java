@@ -14,7 +14,7 @@ public class TestTemplate {
     @Before
     public void setup() {
         // Rabbit 및 World 초기화
-        rabbit = new RabbitTest(1, 0, Direction.RIGHT, Rabbit.Type.RABBIT);
+        rabbit = new RabbitTest(0, 0, Direction.RIGHT, Rabbit.Type.RABBIT);
         world = TextWorldManip.createWorld(
             "#####"
         );
