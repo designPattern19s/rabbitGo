@@ -77,9 +77,9 @@ public class TestTokens
 
         //when
         world.abilities.put(Token.Type.erase, 2);
-        world.changes.addToken( 1, 1, Token.Type.erase );
+        world.changes.addToken( 1, 3, Token.Type.erase );
 
         //then
-        assertEquals( new Integer( 1 ), new Integer( world.abilities.get( Token.Type.erase )) );
+        assertEquals( new Integer( 2 ), new Integer( world.abilities.get( Token.Type.erase )) );
     }
 }
