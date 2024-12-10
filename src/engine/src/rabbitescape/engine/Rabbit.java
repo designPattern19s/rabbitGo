@@ -24,8 +24,6 @@ public class Rabbit extends Thing implements Comparable<Rabbit>
 
     public int index;
 
-    private Falling falling;
-
     public Direction dir;
     public boolean onSlope;
     /** Rabbits move up 1 cell to bash from a slope.
@@ -58,7 +56,7 @@ public class Rabbit extends Thing implements Comparable<Rabbit>
 
     public boolean isFallingToDeath()
     {
-        falling = Falling.getInstance();
+        Falling falling = Falling.getInstance();
         falling.getVariables( behaviourVariables );
         boolean fallingToDeath = falling.isFallingToDeath();
         falling.saveVariables( behaviourVariables );
