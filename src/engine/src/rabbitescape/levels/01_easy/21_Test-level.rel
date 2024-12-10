@@ -10,7 +10,7 @@
 :num_to_save=1
 :rabbit_delay=4
 :music=tryad-witness
-:dig=5
+:erase=5
 :pause=3
 :tempBlock=3
 ###########
